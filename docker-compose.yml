@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  aides-client:
+    container_name: aides-client
+    build: 
+      context: .
+      dockerfile: ./docker/dev/app.dockerfile
+    restart: always
+    ports:
+      - 5174:5174
+    volumes:
+      - ./client:/client
+    env_file:
+      - .env
