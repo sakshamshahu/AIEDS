@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-background': 'rgba(26, 35, 46, 0.20)',
+        'primary-background': '#1A232E',
         'secondary-white': '#c7c7c7',
       },
       transitionTimingFunction: {
