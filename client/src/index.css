@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pulse {
+  50% {
+      opacity: .5;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -9,6 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0b121a;
 }
 
 code {
@@ -32,4 +39,14 @@ code {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.sphere1 {
+  border-radius: 665px;
+  background: #7aebfb;
+  filter: blur(250px);
+}
+
+.animate-pulse-slow {
+  animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

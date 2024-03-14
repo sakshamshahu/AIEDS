@@ -49,8 +49,8 @@ const Navbar = () => {
             <img className="w-[3rem] rounded-full object-contain" src="https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4" alt="" />
           </div>
           <div className='flex flex-col justify-center items-end'>
-            <div className='font-redhat font-black text-[1.125rem]'>H-SM</div>
-            <div className='font-redhat font-extrabold opacity-60 text-[0.75rem]'>AIDES Regular User</div>
+            <div className='font-redhat font-black text-[1.125rem] leading-1'>H-SM</div>
+            <div className='font-redhat font-extrabold opacity-60 text-[0.75rem] leading-none'>AIDES Regular User</div>
           </div>
         </div>
       </div>

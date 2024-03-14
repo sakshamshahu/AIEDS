@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         'primary-background': '#0B121A',
         'secondary-white': '#c7c7c7',
+        'primary-white': '#FFF',
       },
       transitionTimingFunction: {
         'out-flex': 'cubic-bezier(0.05, 0.6, 0.4, 0.9)',
@@ -13,6 +14,9 @@ module.exports = {
       fontFamily: {
         redhat: ['"Red Hat Display"', 'sans-serif'],
       },
+      animation: {
+        'animate-pulse': 'pulse 10s infinite',
+      }
     },
   },
   plugins: [],
