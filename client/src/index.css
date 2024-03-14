@@ -2,16 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pulse {
+  50% {
+      opacity: .5;
+  }
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0b121a;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.textbackground {
+  background: var(
+    --grad,
+    linear-gradient(
+      270deg,
+      #d2ffa5 0%,
+      #b0ffde 14.25%,
+      #b3e8ff 34.57%,
+      #d3b1ff 55.92%,
+      #ffb6d5 83.53%,
+      #ffb5b5 100%
+    )
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sphere1 {
+  border-radius: 665px;
+  background: #7aebfb;
+  filter: blur(250px);
+}
+
+.animate-pulse-slow {
+  animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
