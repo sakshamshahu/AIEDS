@@ -7,11 +7,11 @@ const HeroSection = () => {
             <div className='absolute left-[-23vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow'></div>
 
             <div className='flex flex-col w-full items-center justify-start h-full mt-[6rem]'>
-                <div className='font-redhat font-black text-[6rem] leading-none textbackground'>AIDES</div>
-                <div className='font-redhat font-black text-[1.25rem]  leading-none text-primary-white'>Revise, Adapt, Unleash</div>
+                <div className='font-redhat font-black text-[6rem] leading-none textbackground'>AIEDS</div>
+                <div className='font-redhat font-black text-[1.25rem]  rleading-none text-primary-white'>Revise, Adapt, Unleash</div>
                 <div className='flex justify-center items-center w-full h-[100vh] relative'>
-                    <img src={grid} className='w-[70rem] translate-x-0 pr-[4rem] absolute' alt="grid_here" />
-                    <img src={heroVector} className='w-[40rem] translate-x-6 z-5 pr-[4rem] absolute' alt="grid_here" />
+                    <img src={grid} className='w-[70rem] translate-x-0 pr-[4rem] absolute' alt="" />
+                    <img src={heroVector} className='w-[40rem] translate-x-6 z-5 pr-[4rem] absolute' alt="" />
                 </div>
             </div>
 

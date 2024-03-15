@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         'primary-background': '#0B121A',
+        'secondary-background' : '#7b7b7b29',
         'secondary-white': '#c7c7c7',
         'primary-white': '#FFF',
       },
@@ -13,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         redhat: ['"Red Hat Display"', 'sans-serif'],
+        plusjakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
       animation: {
         'animate-pulse': 'pulse 10s infinite',
