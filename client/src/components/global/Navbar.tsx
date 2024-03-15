@@ -5,7 +5,7 @@ const Navbar = () => {
     <div className='flex flex-col w-[83rem] justify-start items-center h-[3.25rem] border-b-[1px] border-[#e7dddd]/30 mt-1'>
       <div className='w-full h-[3rem] flex justify-between items-center px-3'>
         <div className='flex h-[3rem] gap-[1rem] justify-start items-center'>
-          <div className='font-redhat font-black text-[3vh] textbackground'>AIDES</div>
+          <div className='font-redhat font-black text-[3vh] textbackground'>AIEDS</div>
           <div className=' h-[3rem] flex justify-start items-center gap-1'>
             <button className='w-[2.5rem] h-[2.5rem] focus:bg-blue-400 focus:bg-opacity-20 bg-transparent rounded-full flex justify-center items-center transition ease-in-out duration-200'>
               {/* home */}
