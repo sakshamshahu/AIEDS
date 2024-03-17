@@ -8,6 +8,7 @@ module.exports = {
         'secondary-background' : '#7b7b7b29',
         'secondary-white': '#c7c7c7',
         'primary-white': '#FFF',
+        'tertiary-white': '#BABABA'
       },
       transitionTimingFunction: {
         'out-flex': 'cubic-bezier(0.05, 0.6, 0.4, 0.9)',
