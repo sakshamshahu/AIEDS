@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ai"
+version = "0.1.0"
+description = ""
+authors = ["sakshamshahu <sakshamshahu.work@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.1.12"
+ollama = "^0.1.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
