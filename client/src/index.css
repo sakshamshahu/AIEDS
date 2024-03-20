@@ -1,8 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap");
 
 @keyframes pulse {
   50% {
@@ -113,3 +115,41 @@ code {
 .contextboxtextshadow {
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.75);
 }
+
+.texxtboxgradient {
+  position: relative;
+}
+
+.textboxgradient:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  background: linear-gradient(
+      135deg,
+      #deffea 0%,
+      #f67a7a 63.54%,
+      #d4d9ff 80.73%,
+      #dc79ff 92%
+    )
+    border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+/* .contextblureffect {
+  background: url(<path-to-image>) lightgray 0% 0% / 71.923828125px
+      71.923828125px repeat,
+    linear-gradient(
+      270deg,
+      rgba(255, 255, 255, 0.01) -20%,
+      rgba(40, 40, 40, 0.06) 75.76%,
+      rgba(255, 255, 255, 0.01) 123.64%
+    );
+  backdrop-filter: blur(90px);
+} */
