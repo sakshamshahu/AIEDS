@@ -5,7 +5,7 @@ services:
     container_name: aides-client
     build: 
       context: .
-      dockerfile: ./docker/dev/app.dockerfile
+      dockerfile: ./docker/dev/client.dockerfile
     restart: always
     ports:
       - 3000:3000
