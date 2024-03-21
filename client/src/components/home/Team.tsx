@@ -1,7 +1,7 @@
 import React from "react";
-import github from "./../assets/github.svg";
-import map from "./../assets/map.svg";
-import linkedin from "./../assets/linkedin.svg";
+import github from "./../../assets/github.svg";
+import map from "./../../assets/map.png";
+import linkedin from "./../../assets/linkedin.svg";
 
 const Team = () => {
   return (
@@ -12,7 +12,7 @@ const Team = () => {
         alt=""
       />
       <div className="z-5 absolute w-[63rem] h-[38rem] flex flex-col justify-center items-center">
-        <h1 className="text-primary-white font-plusjakarta font-bold w-[60rem] text-[3rem] text-center titletextbackground">
+        <h1 className="text-primary-white font-plusjakarta font-bold w-[60rem] text-[4rem] text-center titletextbackground mt-1">
           Meet the team
         </h1>
         <div className="flex justify-center flex-wrap items-center w-full h-fit mt-12 gap-x-[15rem] gap-y-[5.5rem]">
