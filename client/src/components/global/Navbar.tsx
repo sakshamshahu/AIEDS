@@ -1,9 +1,8 @@
 import React from 'react'
-import Home from "./../../assets/home.svg"
 const Navbar = () => {
   return (
     <div className='flex flex-col w-[83rem] justify-start items-center h-[3.25rem] border-b-[1px] border-[#e7dddd]/30 mt-1'>
-      <div className='w-full h-[3rem] flex justify-between items-center px-3'>
+      <div className='w-full h-[3rem] flex justify-between items-center px-3 pb-2'>
         <div className='flex h-[3rem] gap-[1rem] justify-start items-center'>
           <div className='font-redhat font-black text-[3vh] textbackground'>AIEDS</div>
           <div className=' h-[3rem] flex justify-start items-center gap-1'>
@@ -45,8 +44,8 @@ const Navbar = () => {
           </div>
         </div>
         <div className='flex flex-row-reverse justify-end items-center  h-[3rem] gap-2'>
-          <div className='bg-white w-[3rem] h-[3rem] rounded-full'>
-            <img className="w-[3rem] rounded-full object-contain" src="https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4" alt="" />
+          <div className='w-[2.8rem] h-[3rem] bg-gray-800/10 rounded-full flex justify-center items-center'>
+            <img className="w-[2.8rem] rounded-full object-contain" src="https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4" alt="" />
           </div>
           <div className='flex flex-col justify-center items-end'>
             <div className='font-redhat font-black text-[1.125rem] leading-1'>H-SM</div>

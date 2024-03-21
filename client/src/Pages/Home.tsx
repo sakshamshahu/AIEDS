@@ -2,7 +2,8 @@ import React from 'react'
 import Navbar from '../components/global/Navbar'
 import HeroSection from '../components/home/HeroSection'
 import ContextSection from '../components/home/ContextSection'
-import Team from '../components/Team'
+import ExploreModel from '../components/home/ExploreModel'
+import Footer from '../components/global/Footer'
 
 const Home = () => {
   return (
@@ -10,7 +11,8 @@ const Home = () => {
       <Navbar/>
       <HeroSection/>
       <ContextSection/>
-      <Team/>
+      <ExploreModel/>
+      <Footer/>
     </div>
   )
 }
