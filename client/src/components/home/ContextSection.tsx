@@ -1,7 +1,7 @@
 import rectangle from "./../../assets/RectangleUp.svg"
 const ContextSection = () => {
   return (
-    <div className='w-full h-fit mt-[30vh] flex flex-col justify-center items-center'>
+    <div className='w-full h-fit mt-[1rem] flex flex-col justify-center items-center'>
       <div className='relative w-[83rem] h-[38rem]'>
         <img src={rectangle} className="absolute w-[83rem]" alt="" />
         <div className="z-5 absolute w-full h-full flex flex-col justify-center items-center">

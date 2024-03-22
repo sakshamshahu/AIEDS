@@ -4,7 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @keyframes pulse {
   50% {
@@ -13,7 +13,11 @@
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -25,7 +29,9 @@
 }
 
 @keyframes bounce2 {
-  0%, 50%, 100% {
+  0%,
+  50%,
+  100% {
     transform: translateY(0);
   }
   25% {
@@ -81,7 +87,6 @@ code {
 .animate-bounce-slow {
   animation: bounce2 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   animation-delay: 1s;
-
 }
 
 .animate-bounce-slow-late {
@@ -176,11 +181,7 @@ code {
 }
 
 .backdroper {
-  background: url('./assets/_shape_.png') lightgray 0% 0% / 71.923828125px 71.923828125px repeat, linear-gradient(270deg, rgba(255, 255, 255, 0.01) -20%, rgba(40, 40, 40, 0.06) 75.76%, rgba(255, 255, 255, 0.01) 123.64%); 
-  backdrop-filter: blur(90px);  
-}
-/* .contextblureffect {
-  background: url(<path-to-image>) lightgray 0% 0% / 71.923828125px
+  background: url("./assets/_shape_.png") lightgray 0% 0% / 71.923828125px
       71.923828125px repeat,
     linear-gradient(
       270deg,
@@ -189,4 +190,4 @@ code {
       rgba(255, 255, 255, 0.01) 123.64%
     );
   backdrop-filter: blur(90px);
-} */
+}
