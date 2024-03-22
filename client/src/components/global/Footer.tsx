@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className='w-full h-fit flex flex-col items-center justify-start px-[1.5rem] pt-[1.5rem] pb-[1rem] bg-footer-background'>
+        <div className='z-10 w-full h-fit flex flex-col items-center justify-start px-[1.5rem] pt-[1.5rem] pb-[1rem] bg-footer-background'>
             <div className='h-[9rem] w-full max-w-[100rem] flex justify-between'>
                 <div className='flex flex-col justify-start items-start gap-1'>
                     {/* change them to pages link  */}
