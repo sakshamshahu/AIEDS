@@ -2,11 +2,6 @@ import rect from './../../assets/_Rect_.png'
 import rect2 from './../../assets/_Rect_2.png'
 import shape from './../../assets/_shape_.png'
 const ExploreModel = () => {
-  const calculateLengthInVW = () : number => {
-    const vw = window.innerWidth;
-    const lengthInVW = vw / 2.7;
-    return lengthInVW;
-  }
 
   return (
     <div className='relative my-[7rem] w-full h-[65rem]'>
