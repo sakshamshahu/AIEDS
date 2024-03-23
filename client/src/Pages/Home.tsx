@@ -5,6 +5,7 @@ import ContextSection from '../components/home/ContextSection'
 import ExploreModel from '../components/home/ExploreModel'
 import Footer from '../components/global/Footer'
 import Team from '../components/home/Team'
+import Reviews from '../components/home/Reviews'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <ContextSection/>
       <ExploreModel/>
       <Team/>
+      <Reviews/>
       <Footer/>
     </div>
   )

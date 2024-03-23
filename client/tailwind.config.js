@@ -25,6 +25,7 @@ module.exports = {
         plusjakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
         natosans: ['"Nato Sans Hong Kong"', 'sans-serif'],
         poppins: ['"Poppins"', 'sans-serif'],
+        inter: ['"Inter"', 'sans-serif']
       },
       animation: {
         'animate-pulse': 'pulse 10s infinite',
