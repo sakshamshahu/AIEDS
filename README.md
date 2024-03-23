@@ -1,1 +1,2 @@
 # AIDES
+A tool which helps users control their learning process. AIDES harnesses the power of LLMs by providing text summaries and insights on user uploaded content. It also features active revision and quizing which makes learning even more fun and intuitive.
