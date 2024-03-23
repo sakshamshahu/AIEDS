@@ -3,3 +3,6 @@
 
 #venv
 AI/.venv
+
+#data
+AI/ai/data/structured.pdf
