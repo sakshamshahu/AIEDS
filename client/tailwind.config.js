@@ -23,6 +23,7 @@ module.exports = {
         redhat: ['"Red Hat Display"', 'sans-serif'],
         plusjakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
         natosans: ['"Nato Sans Hong Kong"', 'sans-serif'],
+        inter: ['"Inter"', 'sans-serif']
       },
       animation: {
         'animate-pulse': 'pulse 10s infinite',
