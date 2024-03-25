@@ -4,7 +4,9 @@ RUN apk add --no-cache gcc musl-dev linux-headers libffi libffi-dev openssl-dev
 
 RUN pip install poetry==1.7.1
 
-WORKDIR /AI
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /AIDES
 COPY ../../AI/pyproject.toml ./
 COPY ../../AI/poetry.lock ./
 
