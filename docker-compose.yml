@@ -1,6 +1,16 @@
 version: "3.3"
 
 services:
+  aides-ai:
+    container_name: aides-ai
+    build:
+      context: .
+      dockerfile: ./docker/dev/ai.dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./AI:/AI
+    env_file:
+      - .env
   aides-client:
     container_name: aides-client
     build: 
