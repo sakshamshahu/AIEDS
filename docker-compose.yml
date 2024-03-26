@@ -8,9 +8,10 @@ services:
       dockerfile: ./docker/dev/ai.dockerfile
     restart: always
     volumes:
-      - ./AI:/AI
+      - ./AI:/AIDES
     env_file:
       - .env
+      
   aides-client:
     container_name: aides-client
     build: 
