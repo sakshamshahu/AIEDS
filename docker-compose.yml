@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/dev/ai.dockerfile
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./AI:/AIDES
     env_file:
@@ -17,7 +17,7 @@ services:
     build: 
       context: .
       dockerfile: ./docker/dev/client.dockerfile
-    restart: always
+    restart: unless-stopped
     ports:
       - 3000:3000
     volumes:
