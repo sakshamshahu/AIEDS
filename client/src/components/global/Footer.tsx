@@ -1,20 +1,20 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"
+
 
 const Footer = () => {
+    let navigate = useNavigate();
     return (
         <div className='z-10 w-full h-fit flex flex-col items-center justify-start px-[1.5rem] pt-[1.5rem] pb-[1rem] bg-footer-background'>
             <div className='h-[9rem] w-full max-w-[100rem] flex justify-between'>
                 <div className='flex flex-col justify-start items-start gap-1'>
-                    {/* change them to pages link  */}
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey'>Home</p>
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey'>Playground</p>
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey'>Settings</p>
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey'>Docs</p>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey cursor-pointer select-none' href="/">Home</a>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey' href="/playground">Playground</a>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey' href="/settings">Settings</a>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey' href="/docs">Docs</a>
                 </div>
                 <div className='flex flex-col justify-start items-start gap-1'>
-                    {/* change them to pages link  */}
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey/80'>GitHub</p>
-                    <p className='text-[1.1rem] font-natosans text-tertiary-grey/80'>FAQ</p>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey/80' href="https://github.com/sakshamshahu/AIEDS" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a className='text-[1.1rem] font-natosans text-tertiary-grey/80' href="/docs">FAQ</a>
                 </div>
                 <div className='flex flex-col justify-start items-start gap-1'>
                     <div className='font-redhat font-black text-[3vh] textbackground'>AIEDS</div>
@@ -29,9 +29,9 @@ const Footer = () => {
 
                 </div>
                 <div className='flex flex-col justify-start items-start gap-1'>
-                    <button className='border border-[#4A9292] border-1 px-[1.5rem] py-[0.6rem] text-[1rem] font-natosans text-tertiary-grey/80 rounded-lg'>
+                    <a className='border border-[#4A9292] border-1 px-[1.5rem] py-[0.6rem] text-[1rem] font-natosans text-tertiary-grey/80 rounded-lg' href="/playground">
                         Run our model
-                    </button>
+                    </a>
                 </div>
             </div>
             {/* padding */}
