@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/dev/ai.dockerfile
-    restart: unless-stopped
+    restart: on-failure
     volumes:
       - ./AI:/AIDES
     env_file:

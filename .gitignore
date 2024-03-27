@@ -6,6 +6,8 @@ AI/.venv
 
 #data
 AI/ai/data/structured.pdf
+
 # AI/ai/data/structured.txt
 
 AI/ai/__pycache__
+
