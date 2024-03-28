@@ -9,7 +9,7 @@ import Settings from './Pages/Settings';
 
 function App() {
   return (
-    <div className="w-full h-full bg-primary-background">
+    <div className="w-full h-fit bg-primary-background">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
