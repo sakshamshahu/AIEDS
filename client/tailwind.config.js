@@ -17,6 +17,7 @@ module.exports = {
         'footer-background' : '#11171D',
         'textbox-border' : '#365374',
         'textbox-background' : '#70DADA80',
+        'textbox-background-hover' : '#57EEEE80',
       },
       transitionTimingFunction: {
         'out-flex': 'cubic-bezier(0.05, 0.6, 0.4, 0.9)',
