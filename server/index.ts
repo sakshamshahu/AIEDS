@@ -9,7 +9,6 @@ app.use(express.json());
 
 const port = process.env.PORT || 8000;
 
-// make the user friend's section here now and connect it over the db (plan the entire schema for the user 1v1 chat)
 app.get("/", async (req: Request, res: Response) => {
   res.send("AIDES Backend!!! \n designed by HSM \n © 2024 AIDES. All rights reserved.")
 })
