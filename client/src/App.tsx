@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
-import Doca from './Pages/Doca';
+import Docs from './Pages/Docs';
 import Playground from './Pages/Playground';
 import Login from './Pages/Login';
 import NotFound from './Pages/NotFound';
@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/docs" element={<Doca />} />
+          <Route path="/docs" element={<Docs />} />
           <Route path="/playground" element={<Playground />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/login" element={<Login />} />
