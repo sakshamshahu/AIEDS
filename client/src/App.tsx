@@ -6,22 +6,25 @@ import Playground from './Pages/Playground';
 import Login from './Pages/Login';
 import NotFound from './Pages/NotFound';
 import Settings from './Pages/Settings';
+import UserProvider from './context/userContext';
 
 function App() {
   return (
-    <div className="w-full h-fit bg-primary-background">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/docs" element={<Doca />} />
-          <Route path="/playground" element={<Playground />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/login" element={<Login />} />
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </div>
+    <UserProvider>
+      <div className="w-full h-fit bg-primary-background">
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/docs" element={<Doca />} />
+            <Route path="/playground" element={<Playground />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </div>
+    </UserProvider> 
   );
 }
 
