@@ -35,7 +35,7 @@ const Reviews = () => {
                 </div>
               </div>
               <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
-                Don’t take it from me:{" "}
+                Don't take it from me:{" "}
                 <span className="text-purple-500">@reflectnotes</span> is magic.
               </div>
             </div>

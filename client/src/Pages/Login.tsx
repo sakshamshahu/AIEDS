@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import rect from './../assets/_Rect_.png'
-import rect2 from './../assets/_Rect_2.png'
-import Navbar from '../components/global/Navbar';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import rect from "./../assets/_Rect_.png";
+import rect2 from "./../assets/_Rect_2.png";
+import Navbar from "../components/global/Navbar";
 
 const Login = () => {
   const [credentails, setCredentails] = useState({
@@ -50,7 +50,6 @@ const Login = () => {
       //   localStorage.setItem("token", json.auth_token);
       //   navigate("/");
       // } else {
-
       // }
     }
   };
@@ -58,22 +57,24 @@ const Login = () => {
     setCredentails({ ...credentails, [e.target.name]: e.target.value });
   };
   return (
-    <div className='relative overflow-x-hidden w-full h-[100vh] flex flex-col justify-start items-center'>
-      <Navbar/> 
+    <div className="relative overflow-x-hidden w-full h-[100vh] flex flex-col justify-start items-center">
+      <Navbar />
       {/* TODO: add state to show elements */}
-      <div className='absolute left-[-23vh] top-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30'></div>
-      <div className='absolute right-[-23vh] bottom-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30'></div>
+      <div className="absolute left-[-23vh] top-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30"></div>
+      <div className="absolute right-[-23vh] bottom-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30"></div>
 
-      <section className='mt-[3rem]'>
+      <section className="mt-[3rem]">
         <div className="relative flex flex-col items-center justify-center px-6 py-8 h-[45rem] lg:py-0">
-          <div className='absolute z-0 opacity-70 w-[11rem] h-fit top-[6rem] left-[-5rem] animate-bounce-slow translate-y-5'>
+          <div className="absolute z-0 opacity-70 w-[11rem] h-fit top-[6rem] left-[-5rem] animate-bounce-slow translate-y-5">
             <img src={rect} alt="recthere" />
           </div>
-          <div className='absolute z-0 opacity-70 w-[11rem] h-fit bottom-[1rem] right-[-6rem] animate-bounce-slow-late'>
-            <img src={rect2} className='' alt="recthere" />
+          <div className="absolute z-0 opacity-70 w-[11rem] h-fit bottom-[1rem] right-[-6rem] animate-bounce-slow-late">
+            <img src={rect2} className="" alt="recthere" />
           </div>
           <div className="flex items-center mb-6">
-            <div className='font-redhat font-black text-[7vh] textbackground'>AIEDS</div>
+            <div className="font-redhat font-black text-[7vh] textbackground">
+              AIEDS
+            </div>
           </div>
           <div className="z-10 w-[35rem] rounded-[1rem] border border-textbox-border border-1 border-opacity-20 backdrop-blur-md bg-transparent">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -236,7 +237,7 @@ const Login = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
