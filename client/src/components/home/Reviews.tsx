@@ -36,7 +36,7 @@ const Reviews = () => {
               </div>
               <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
                 Don't take it from me:{" "}
-                <span className="text-purple-500">@reflectnotes</span> is magic.
+                <span className="text-purple-500">@aieds</span> is magic.
               </div>
             </div>
           </div>
@@ -58,9 +58,9 @@ const Reviews = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
+              <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left">
                 Really, really liking{" "}
-                <span className="text-purple-500">@reflectnotes</span> so far.
+                <span className="text-purple-500">@aieds</span> so far.
                 It's just the right amount of simple/fast for a personal note
                 taking app and does most of the hard work of organizing in the
                 background.
@@ -87,7 +87,34 @@ const Reviews = () => {
               </div>
               <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
                 Really, really liking{" "}
-                <span className="text-purple-500">@reflectnotes</span> so far.
+                <span className="text-purple-500">@aieds</span> so far.
+                It's just the right amount of simple/fast for a personal note
+                taking app and does most of the hard work of organizing in the
+                background.
+              </div>
+            </div>
+          </div>
+
+          <div className="ml-12 flex gap-[1rem] contextboxbackground rounded-[16px] w-[500px] h-[236px] border-[0.06px] border-gray-100 py-[0.8rem] bg-opacity-10 border-opacity-30">
+            <div className="flex flex-col">
+              <div className="flex flex-row ps-6 pt-4">
+                <img
+                  src={"https://avatars.githubusercontent.com/u/92656939?v=4"}
+                  className="h-[44px] w-[44px] rounded-[22px] object-cover"
+                  alt=""
+                />
+                <div>
+                  <div className="ps-4 font-inter font-medium font-normnl text-primary-white text-[16px] ">
+                    Sidhant Tomar
+                  </div>
+                  <div className="w-[13rem] ps-4 text-[13px] font-inter text-tertiary-white text-left">
+                    @Cryptographer
+                  </div>
+                </div>
+              </div>
+              <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
+                Really, really liking{" "}
+                <span className="text-purple-500">@aieds</span> so far.
                 It's just the right amount of simple/fast for a personal note
                 taking app and does most of the hard work of organizing in the
                 background.
@@ -114,7 +141,7 @@ const Reviews = () => {
               </div>
               <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
                 Really, really liking{" "}
-                <span className="text-purple-500">@reflectnotes</span> so far.
+                <span className="text-purple-500">@aieds</span> so far.
                 It's just the right amount of simple/fast for a personal note
                 taking app and does most of the hard work of organizing in the
                 background.
@@ -141,7 +168,7 @@ const Reviews = () => {
               </div>
               <div className="w-[420px] ps-8 pt-6 text-[15px] font-normal font-inter text-tertiary-white text-left ">
                 Really, really liking{" "}
-                <span className="text-purple-500"> @reflectnotes</span> so far.
+                <span className="text-purple-500"> @aieds</span> so far.
                 It's just the right amount of simple/fast for a personal note
                 taking app and does most of the hard work of organizing in the
                 background.

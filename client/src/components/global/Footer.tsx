@@ -19,7 +19,7 @@ const Footer = () => {
                 <div className='flex flex-col justify-start items-start gap-1'>
                     <div className='font-redhat font-black text-[3vh] textbackground'>AIEDS</div>
                     <p className='text-[0.9rem] font-natosans text-tertiary-grey/80 mb-1'>sidhant.tomar003@gmail.com</p>
-                    <p className='text-[1.3rem] font-natosans text-tertiary-grey'>+91 7668373203</p>
+                    <p className='text-[1.3rem] font-natosans text-tertiary-grey'>+91 76683 73203</p>
                     <div className='flex justify-start items-center gap-3'>
                         <svg width="8" height="8" viewBox="0 0 8 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="4" cy="4" r="3.5" stroke="#2CD149" />
