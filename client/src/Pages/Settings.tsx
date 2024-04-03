@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 // import contextValue from "../context/User/userContext.js";
 import { useNavigate } from "react-router-dom";
 import CloudinaryUploadWidget from "./cloudinaryUpload";
+import NavbarSec from "../components/global/NavbarSec";
+import Footer from "../components/global/Footer";
 
 const Settings = () => {
   // const { showAlert } = props;
@@ -16,13 +18,6 @@ const Settings = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   let navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-    } else {
-      navigate("/login");
-    }
-    // eslint-disable-next-line
-  }, []);
   // const context = useContext(contextValue);
   // const { userData, setUserData, getuserinfo, changename, changepassword } =
   // context;
@@ -117,6 +112,7 @@ const Settings = () => {
 
   return (
     <>
+    <NavbarSec/>
       <div className="isolate  px-6 py-14">
         <div
           className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -219,7 +215,7 @@ my-3 mx-3 z-50"
                           aria-hidden="true"
                         />
                       )}
-                      <CloudinaryUploadWidget />
+                      {/* <CloudinaryUploadWidget /> */}
                     </div>
                   </div>
                 </div>
@@ -394,6 +390,7 @@ my-3 mx-3 z-50"
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import rect from "./../assets/_Rect_.png";
 import rect2 from "./../assets/_Rect_2.png";
-import Navbar from "../components/global/Navbar";
+import { UserContext } from "../context/userContext";
+import { BsGithub , BsGoogle } from 'react-icons/bs';
+import NavbarSec from "../components/global/NavbarSec";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const context = useContext(UserContext);
+  const { userInfo, setUserInfo, RegisterUser, signInUser, forgotPassword, UserDetailsFirebase, signInUserGoogle, signInUserGitHub, getuserinfo } = context!;
+  
   const [credentails, setCredentails] = useState({
     email: "",
     password: "",
@@ -14,7 +21,6 @@ const Login = () => {
 
   const [signup, setSignup] = useState(false);
   const [showpassword, setShowpassword] = useState(false);
-  let navigate = useNavigate();
 
   // const context = useContext(userContext);
   // const { login, signin } = context;
@@ -58,7 +64,7 @@ const Login = () => {
   };
   return (
     <div className="relative overflow-x-hidden w-full h-[100vh] flex flex-col justify-start items-center">
-      <Navbar />
+      <NavbarSec />
       {/* TODO: add state to show elements */}
       <div className="absolute left-[-23vh] top-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30"></div>
       <div className="absolute right-[-23vh] bottom-[10%] w-[17rem] h-[30rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-30"></div>
@@ -211,6 +217,29 @@ const Login = () => {
                       />
                     </div>
                   )}
+                </div>
+                <div className="my-6 mx-2">
+                  <div className="relative">
+                    {/* 50 */}
+                    <div className="absolute inset-0 flex justify-between items-center">
+                      <div className="w-[45%] border-t border-gray-300/30" />
+                      <div className="w-[45%] border-t border-gray-300/30" />
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="bg-transparent px-2 text-primary-white">
+                        OR
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 flex gap-2">
+                    <button type='button' onClick={signInUserGoogle} className='inline-flex w-full justify-center rounded-md bg-transparent px-4 py-2 text-gray-500 shadow-sm ring-1 ring-primary-white ring-opacity-10 hover:bg-white/10  transition ease-in-out'>
+                      <BsGoogle />
+                    </button>
+                    <button type='button' onClick={signInUserGitHub} className='inline-flex w-full justify-center rounded-md bg-transparent px-4 py-2 text-gray-500 shadow-sm ring-1 ring-primary-white ring-opacity-10 hover:bg-white/10 transition ease-in-out'>
+                      <BsGithub />
+                    </button>
+                  </div>
                 </div>
                 <button
                   type="submit"

@@ -1,7 +1,12 @@
 import React, { useContext, useEffect } from "react";
 // import contextValue from "../context/User/userContext.js";
 
-const CloudinaryUploadWidget = (props) => {
+interface CloudinaryUploadWidgetProps {
+  handleUploadSuccess: (url: string) => void;
+  showAlert: (message: string, type: string) => void;
+}
+
+const CloudinaryUploadWidget : React.FC<CloudinaryUploadWidgetProps>  = (props) => {
   const { handleUploadSuccess, showAlert } = props
   const cloudName = "defrwqxv6";
   const uploadPreset = "dfr2meo6";
