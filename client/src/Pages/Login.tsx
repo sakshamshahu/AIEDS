@@ -18,10 +18,9 @@ const Login = () => {
     name: "",
     cpassword: "",
   });
-
   const [signup, setSignup] = useState(false);
   const [showpassword, setShowpassword] = useState(false);
-
+  console.log(UserDetailsFirebase)
   // const context = useContext(userContext);
   // const { login, signin } = context;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +32,12 @@ const Login = () => {
       if (credentails.password !== credentails.cpassword) {
         return;
       }
+      if ( (credentails.cpassword && credentails.name && credentails.email && credentails.password) && (credentails.cpassword !== credentails.password)) {
+        return;
+      }
+
+      RegisterUser(credentails.email, credentails.name, credentails.password)
+
       // json = await ((signin({
       //   name: credentails.name,
       //   email: credentails.email,
@@ -48,6 +53,8 @@ const Login = () => {
       // }
     } else {
       // If signup is false, call the login context
+      signInUser(credentails.email, credentails.password);
+
       // json = await login({
       //   email: credentails.email,
       //   password: credentails.password,

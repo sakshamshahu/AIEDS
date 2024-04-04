@@ -72,33 +72,26 @@ const UserProvider = ({ children }: UserProviderProps) => {
         return unsubscribe;
     });
 
-    const RegisterUser = (email: string, name: string, password: string) => {
-        // try {
-        //     createUserWithEmailAndPassword(auth, email, password)
-        //         .then(() => {
-        //             return updateProfile(auth.currentUser!, {
-        //                 displayName: name
-        //             })
-        //         })
-        //         .then(res => console.log(res));
-        // } catch {
-        //     (err: any) => {
-        //         console.error(err.message);
-        //     }
-        // } finally {
-        //     // setLoading -> false
-        // }
-        try {
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    return updateProfile(auth.currentUser!, {
-                        displayName: name
-                    })
-                })
-                .then(res => console.log(res));
-        } finally {
-            setLoading(false);
-        }
+    const RegisterUser = async (email: string, name: string, password: string) => {
+        setLoading(true);
+    try {
+        // Creating user and updating profile
+        await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(auth.currentUser!, { displayName: name });
+        console.log("User registered successfully!", auth.currentUser);
+        setUserInfo({
+                name: auth.currentUser?.displayName!,
+                img: auth.currentUser?.photoURL!,
+                userid: auth.currentUser?.uid!,
+                joined: auth.currentUser?.metadata.creationTime!,
+                email: auth.currentUser?.email!
+        });
+        // TODO: need to add resultant for already existing user
+    } catch (error : any) {
+        console.error("Registration failed:", error.message);
+    } finally {
+        setLoading(false);
+    }
     };
 
     const getuserinfo = async (id: string, name: string, email: string, img: string, joined: string) => {
@@ -203,7 +196,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
                     joined: user.metadata.creationTime!,
                     email: user.email!
                 });
-
+                console.log(userInfo);
                 // getuserinfo(
                 //     user.uid,
                 //     user.displayName!,
