@@ -6,7 +6,7 @@ import Playground from './Pages/Playground';
 import Login from './Pages/Login';
 import NotFound from './Pages/NotFound';
 import Settings from './Pages/Settings';
-import UserProvider from './context/userContext';
+import UserProvider from './context/user_context';
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from "
 import { useNavigate } from "react-router-dom";
 import rect from "./../assets/_Rect_.png";
 import rect2 from "./../assets/_Rect_2.png";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context/user_context";
 import { BsGithub , BsGoogle } from 'react-icons/bs';
 import NavbarSec from "../components/global/NavbarSec";
 
