@@ -1,9 +1,15 @@
 import clsx from "clsx"
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
+import { useContext } from "react";
+
+
 const Navbar = () => {
+  const context = useContext(UserContext);
+  const { userInfo, logoutUser } = context!;
+  
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.pathname);
   return (
     <div className='flex flex-col w-[83rem] justify-start items-center h-[3.25rem] border-b-[1px] border-[#e7dddd]/30 mt-1'>
       <div className='w-full h-[3rem] flex justify-between items-center px-3 pb-2'>
@@ -57,15 +63,18 @@ const Navbar = () => {
                 </g>
               </svg>
             </a>
+            {/* <button className="w-[0.2rem] text-[0.9rem]" onClick={logoutUser}>
+              logoutUser
+            </button> */}
           </div>
         </div>
         <div className='flex flex-row-reverse justify-end items-center  h-[3rem] gap-2'>
           <div className='w-[2.8rem] h-[3rem] bg-gray-800/10 rounded-full flex justify-center items-center'>
-            <img className="w-[2.8rem] rounded-full object-contain" src="https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4" alt="" />
+            <img className="w-[2.8rem] rounded-full object-contain"  src={userInfo.img ? userInfo.img : "https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4" } alt="" />
           </div>
           <div className='flex flex-col justify-center items-end'>
-            <div className='font-redhat font-black text-[1.125rem] leading-1'>H-SM</div>
-            <div className='font-redhat font-extrabold opacity-60 text-[0.75rem] leading-none'>AIDES Regular User</div>
+            <div className='font-redhat font-black text-[1.125rem] leading-1'>{userInfo.name}</div>
+            <div className='font-redhat font-extrabold opacity-60 text-[0.75rem] leading-none'>{userInfo.email}</div>
           </div>
         </div>
       </div>

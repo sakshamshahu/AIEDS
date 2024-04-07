@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import rect from "./../assets/_Rect_.png";
 import rect2 from "./../assets/_Rect_2.png";
 import { UserContext } from "../context/userContext";
@@ -7,7 +6,6 @@ import { BsGithub , BsGoogle } from 'react-icons/bs';
 import NavbarSec from "../components/global/NavbarSec";
 
 const Login = () => {
-  const navigate = useNavigate();
 
   const context = useContext(UserContext);
   const { userInfo, setUserInfo, RegisterUser, signInUser, forgotPassword, UserDetailsFirebase, signInUserGoogle, signInUserGitHub, getuserinfo } = context!;
@@ -20,7 +18,11 @@ const Login = () => {
   });
   const [signup, setSignup] = useState(false);
   const [showpassword, setShowpassword] = useState(false);
-  console.log(UserDetailsFirebase)
+
+  useEffect(() => {
+    console.log(userInfo);
+  },[userInfo]);
+  console.log(UserDetailsFirebase);
   // const context = useContext(userContext);
   // const { login, signin } = context;
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +56,8 @@ const Login = () => {
     } else {
       // If signup is false, call the login context
       signInUser(credentails.email, credentails.password);
-
+      console.log("hi");
+      
       // json = await login({
       //   email: credentails.email,
       //   password: credentails.password,

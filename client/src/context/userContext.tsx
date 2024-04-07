@@ -25,7 +25,7 @@ export interface UserContextInterface {
     signInUserGoogle: () => void;
     logoutUser: () => void;
     forgotPassword: (email: string) => Promise<void>;
-    getuserinfo: (id: string, name: string, email: string, img: string, joined: string, color: string) => void;
+    getuserinfo: (id: string, name: string, email: string, img: string, joined: string) => void;
 }
 
 const defaultState = {
@@ -61,7 +61,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     const [UserDetailsFirebase, setUserDetailsFirebase] = useState<User | null>(null!);
     const [Loading, setLoading] = useState(false);
 
-    const host = "http://localhost:3000";
+    const host = "http://localhost:8000";
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (res) => {
@@ -74,34 +74,36 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     const RegisterUser = async (email: string, name: string, password: string) => {
         setLoading(true);
-    try {
-        // Creating user and updating profile
-        await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(auth.currentUser!, { displayName: name });
-        console.log("User registered successfully!", auth.currentUser);
-        setUserInfo({
-                name: auth.currentUser?.displayName!,
-                img: auth.currentUser?.photoURL!,
-                userid: auth.currentUser?.uid!,
-                joined: auth.currentUser?.metadata.creationTime!,
-                email: auth.currentUser?.email!
-        });
-        // TODO: need to add resultant for already existing user
-    } catch (error : any) {
-        console.error("Registration failed:", error.message);
-    } finally {
-        setLoading(false);
-    }
+        try {
+            // Creating user and updating profile
+            await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(auth.currentUser!, { displayName: name });
+            console.log("User registered successfully!", auth.currentUser);
+            
+            getuserinfo(
+                auth.currentUser?.uid!,
+                auth.currentUser?.displayName!,
+                auth.currentUser?.email!,
+                auth.currentUser?.photoURL!,
+                auth.currentUser?.metadata.creationTime!
+            );
+            // TODO: need to add resultant for already existing user
+        } catch (error: any) {
+            console.error("Registration failed:", error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const getuserinfo = async (id: string, name: string, email: string, img: string, joined: string) => {
         try {
-            const response = await fetch(`${host}/user/${id}`, {
+            let dater = new Date(joined);
+            const response = await fetch(`${host}/adduser`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ id, name, email, img, joined })
+                body: JSON.stringify({ userid: id, name, email, img, joined: dater })
             });
 
             if (!response.ok) {
@@ -110,9 +112,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
             const json = await response.json();
             setUserInfo({
-                name: json.username!,
+                name: json.name!,
                 img: json.img!,
-                userid: json.id,
+                userid: json.userid,
                 joined: json.joined!,
                 email: json.email!
             });
@@ -125,22 +127,14 @@ const UserProvider = ({ children }: UserProviderProps) => {
         try {
             signInWithEmailAndPassword(auth, email, password)
                 .then(res => {
-
-                    setUserInfo({
-                        name: res.user.displayName!,
-                        img: res.user.photoURL!,
-                        userid: res.user.uid,
-                        joined: res.user.metadata.creationTime!,
-                        email: res.user.email!
-                    });
-
-                    // getuserinfo(
-                    //     res.user.uid,
-                    //     res.user.displayName!,
-                    //     res.user.email!,
-                    //     res.user.photoURL!,
-                    //     res.user.metadata.creationTime!,
-                    // );
+                    console.log(res);
+                    getuserinfo(
+                        res.user.uid,
+                        res.user.displayName!,
+                        res.user.email!,
+                        res.user.photoURL!,
+                        res.user.metadata.creationTime!,
+                    );
                 });
         } catch (err: any) {
             console.error(err.message);
@@ -157,23 +151,15 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 console.log(result);
                 const user = result.user;
-                console.log("user >>>", user);
-                setUserInfo({
-                    name: user.displayName!,
-                    img: user.photoURL!,
-                    userid: user.uid,
-                    joined: user.metadata.creationTime!,
-                    email: user.email!
-                });
 
-                // getuserinfo(
-                //     user.uid,
-                //     user.displayName!,
-                //     user.email!,
-                //     user.photoURL!,
-                //     user.metadata.creationTime!,
-                // );
-                
+                getuserinfo(
+                    user.uid,
+                    user.displayName!,
+                    user.email!,
+                    user.photoURL!,
+                    user.metadata.creationTime!,
+                );
+
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
@@ -188,26 +174,15 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 console.log(result);
                 const user = result.user;
-                console.log("user >>>", user);
-                setUserInfo({
-                    name: user.displayName!,
-                    img: user.photoURL!,
-                    userid: user.uid,
-                    joined: user.metadata.creationTime!,
-                    email: user.email!
-                });
-                console.log(userInfo);
-                // getuserinfo(
-                //     user.uid,
-                //     user.displayName!,
-                //     user.email!,
-                //     user.photoURL!,
-                //     user.metadata.creationTime!,
-                // );
 
-                // setUser(user)
-                // IdP data available using getAdditionalUserInfo(result)
-                // ...
+                getuserinfo(
+                    user.uid,
+                    user.displayName!,
+                    user.email!,
+                    user.photoURL!,
+                    user.metadata.creationTime!,
+                );
+
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
@@ -248,4 +223,4 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
 // value={{ userInfo, setUserInfo, Loading, setLoading, UserDetailsFirebase, setUserDetailsFirebase, RegisterUser, getuserinfo, signInUser, signInUserGitHub, signInUserGoogle, logoutUser, forgotPassword }}
 
-export default UserProvider
+export default UserProvider;
