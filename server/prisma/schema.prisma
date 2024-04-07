@@ -24,7 +24,8 @@ model User {
 }
 
 model Session {
-  sessionId Int   @id @default(autoincrement())
+  id Int   @id @default(autoincrement())
+  sessionid   String    @unique
   user      User? @relation(fields: [userId], references: [id])
   userId    Int?
 }

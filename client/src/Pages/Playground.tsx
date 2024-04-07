@@ -1,7 +1,43 @@
 import Navbar from '../components/global/Navbar'
 import Footer from '../components/global/Footer'
 import Textbox from '../components/playground/Textbox'
+// import { UserContext } from "../context/userContext";
+// import { useNavigate } from 'react-router-dom'
+// import firebase from "firebase/app";
+// import auth from "../firebase";
+// import { useContext, useEffect, useState } from 'react';
+
 const Playground = () => {
+  // const navigate = useNavigate();
+  // const context = useContext(UserContext);
+  // const { userInfo, UserDetailsFirebase, getuserinfo } = context!;
+  // const [authCompleted, setAuthCompleted] = useState(false);
+
+  // console.log(userInfo, UserDetailsFirebase);
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       // User is signed in, you can handle further actions here
+  //       setAuthCompleted(true);
+  //       if (userInfo.userid === "") {
+  //         const { uid, displayName, email, photoURL, metadata } = UserDetailsFirebase || {};
+  //         if (uid && displayName && email && photoURL && metadata?.creationTime) {
+  //           getuserinfo(uid, displayName, email, photoURL, metadata.creationTime);
+  //         }
+  //       } 
+  //     } else {
+  //       // User is signed out, handle accordingly
+  //       setAuthCompleted(false);
+  //       navigate("/login");
+  //     }
+  //   });
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [navigate, userInfo, UserDetailsFirebase]);
+
   return (
     <div className='w-full h-screen bg-primary-background text-secondary-white flex flex-col justify-start pt-2 items-center'>
 
