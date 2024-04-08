@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
-import rectangle from "./../assets/RectangleUp.svg";
-import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
+import NavbarSec from "../components/global/NavbarSec";
 
 const Docs = () => {
   return (
-    <div>
-      <div className=" text-secondary-white bg-primary-background py-10 flex flex-col justify-center items-center">
-        <div className="fixed left-[-23vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow"></div>
+    <div className="relative w-full flex flex-col items-center">
+      <NavbarSec/>
+      <div className=" text-secondary-white bg-primary-background py-10 flex flex-col justify-center items-center w-[80vw]">
+        <div className="absolute left-[-30vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow"></div>
 
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-primary-white font-Roboto font-semibold text-[56px] titletextbackground">
             Documentation
           </h1>
-          <div className="text-[16px] font-normal text-tertiary-white text-left">
+          <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
             Know our project further with the diverse documentation over various
             aspects
           </div>
@@ -27,7 +26,7 @@ const Docs = () => {
             </div>
             <div className="col-span-3">
               <div className="max-w-[54rem] text-lg leading-8 text-slate-600">
-                <div className="text-[16px] font-normal text-tertiary-white text-left">
+                <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   Graphpathguru is a user-friendly application meticulously
                   crafted to offer individuals an accessible platform for
                   in-depth exploration and understanding of algorithmic
@@ -36,7 +35,7 @@ const Docs = () => {
                   with the flexibility to choose and engage with various
                   computational processes.
                 </div>
-                <div className="text-[16px] font-normal text-tertiary-white text-left">
+                <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   Additionally, Graphpathguru includes a host of convenient
                   features, including the ability to save generated graphs for
                   future reference and a streamlined sharing function for
@@ -72,7 +71,7 @@ const Docs = () => {
               How to Start?
             </div>
             <div className="col-span-3">
-              <div className="text-[16px] font-normal text-tertiary-white text-left">
+              <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
                 Graphpathguru is a application focused on making graph
                 algorithms more accessible and understandable for users. By
                 providing a visually intuitive platform, users can explore and
@@ -86,7 +85,7 @@ const Docs = () => {
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
-                    <span className="font-inter font-medium font-normnl text-primary-white text-[16px] ">
+                    <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 1
                     </span>{" "}
                     – Launch the application in the "Playground" state to start
@@ -100,7 +99,7 @@ const Docs = () => {
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
-                    <span className="font-inter font-medium font-normnl text-primary-white text-[16px] ">
+                    <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 2
                     </span>{" "}
                     – Launch the application in the "Playground" state to start
@@ -114,7 +113,7 @@ const Docs = () => {
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
-                    <span className="font-inter font-medium font-normnl text-primary-white text-[16px] ">
+                    <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 3
                     </span>{" "}
                     – Launch the application in the "Playground" state to start
@@ -128,7 +127,7 @@ const Docs = () => {
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
-                    <span className="font-inter font-medium font-normnl text-primary-white text-[16px] ">
+                    <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 4
                     </span>{" "}
                     – Launch the application in the "Playground" state to start
@@ -179,7 +178,7 @@ const Docs = () => {
             </div>
             <div className="col-span-3">
               <div className=" text-lg leading-8 text-slate-600">
-                <div className="text-[16px] font-normal text-tertiary-white text-left">
+                <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   Graphpathguru is a user-friendly application meticulously
                   crafted to offer individuals an accessible platform for
                   in-depth exploration and understanding of algorithmic
@@ -189,7 +188,7 @@ const Docs = () => {
                   computational processes.
                 </div>
 
-                <div className="text-[16px] font-normal text-tertiary-white text-left">
+                <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   Additionally, Graphpathguru includes a host of convenient
                   features, including the ability to save generated graphs for
                   future reference and a streamlined sharing function for
@@ -213,8 +212,8 @@ const Docs = () => {
             </div>
             <div className="col-span-3">
               <div className=" grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-y-10">
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     User-Friendly Interface
                   </span>{" "}
                   —{" "}
@@ -226,8 +225,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Algorithm Variety
                   </span>{" "}
                   —{" "}
@@ -239,8 +238,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Visualization
                   </span>{" "}
                   —{" "}
@@ -252,8 +251,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Options for Saving Graphs
                   </span>{" "}
                   —{" "}
@@ -264,8 +263,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Sharing Functionality
                   </span>{" "}
                   —{" "}
@@ -277,8 +276,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Educational Purpose
                   </span>{" "}
                   —{" "}
@@ -290,8 +289,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Algorithm Parameters
                   </span>{" "}
                   —{" "}
@@ -302,8 +301,8 @@ const Docs = () => {
                   </span>
                 </p>
 
-                <p className="text-[16px] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[16px] ">
+                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
+                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
                     Real-Time Updates
                   </span>{" "}
                   —{" "}
@@ -317,7 +316,7 @@ const Docs = () => {
             </div>
           </section>
         </div>
-        <div className="fixed right-[-23vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow"></div>
+        <div className="absolute right-[-30vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow"></div>
       </div>
       <Footer />
     </div>

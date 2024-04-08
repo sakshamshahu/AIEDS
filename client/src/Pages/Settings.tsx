@@ -75,24 +75,9 @@ const Settings = () => {
   //     showAlert("Recheck your credentails!", "warning");
   //   }
   // };
-  //looks over closing of the window
-  // const handleclick = (e) => {
-  //   setUserData({});
-  //   navigate("/");
-  // };
 
   // const onChange = (e) => {
   //   setDetails({ ...details, [e.target.name]: e.target.value });
-  // };
-
-  // const handleCancel = (e) => {
-  //   setDetails({
-  //     oldpassword: "",
-  //     newpassword: "",
-  //     checkpassword: "",
-  //     name: "",
-  //   });
-  //   navigate("/");
   // };
 
   // useEffect(() => {
@@ -111,49 +96,11 @@ const Settings = () => {
   // }, [navigate]);
 
   return (
-    <>
-    <NavbarSec/>
-      <div className="isolate  px-6 py-14">
-        <div
-          className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          ></div>
-        </div>
+    <div className="w-full flex flex-col items-center">
+      <NavbarSec />
+      <div className="isolate w-[50vw] px-6 py-14">
 
         <div className="mx-auto max-w-2xl text-center">
-          <div
-            className="absolute 
-        right-[17%] top-[25%]
-my-3 mx-3 z-50"
-          >
-            <button
-              type="button"
-              className="text-black/70 hover:scale-125 rounded-full bg-cyan-600/40 transition ease-in-out transition-500 w-8 h-8"
-              // onClick={handleclick}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="w-8 h-8 p-1"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
           <h1 className="text-primary-white font-Roboto font-semibold text-[40px] titletextbackground">
             Settings
           </h1>
@@ -187,9 +134,9 @@ my-3 mx-3 z-50"
                           name="name"
                           id="name"
                           autoComplete="name"
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1  placeholder:text-gray-400  sm:text-sm sm:leading-6"
-                          // placeholder={userData.name}
-                          // onChange={onChange}
+                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1  placeholder:text-gray-400  sm:text-sm sm:leading-6 outline-none text-primary-white"
+                        // placeholder={userData.name}
+                        // onChange={onChange}
                         />
                       </div>
                     </div>
@@ -202,20 +149,20 @@ my-3 mx-3 z-50"
                     >
                       Photo
                     </label>
-                    <div className="mt-2 flex items-center justify-center gap-x-2">
-                      {1 ? (
+                    <div className="mt-2 flex items-center justify-center gap-x-8">
+                      <div className="overflow-hidden rounded-full">
                         <img
-                          // src={userData.image}
-                          className="w-[15vh]"
+                          src="https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4"
+                          className="w-[5rem] "
                           alt="pfpd"
                         />
-                      ) : (
-                        <div
-                          className="h-[15vh] w-[15vh] text-cyan-600"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {/* <CloudinaryUploadWidget /> */}
+                      </div>
+                      <button id="upload_widget"
+                        type="button"
+                        className="rounded-md bg-transparent transition ease-in-out duration-150 hover:bg-[#4A9292]/80 border border-[#4A9292] border-1 px-2.5 py-1.5 text-sm font-semibold text-primary-white"
+                      >
+                        Change
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -233,18 +180,18 @@ my-3 mx-3 z-50"
                         name="oldpassword"
                         id="oldpassword"
                         autoComplete="oldpassword"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1  placeholder:text-gray-400  sm:text-sm sm:leading-6"
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-3 placeholder:text-gray-400  sm:text-sm sm:leading-6  outline-none text-primary-white w-full"
                         placeholder={showOldPassword ? "password" : "••••••••"}
-                        // onChange={onChange}
+                      // onChange={onChange}
                       />
                       <button
                         type="button"
-                        className="absolute right-3 top-[20%] text-[#fff] focus:outline-none"
+                        className="mx-2 right-3 top-[20%] text-primary-white focus:outline-none"
                         onClick={() => setShowOldPassword(!showOldPassword)}
                       >
                         {showOldPassword ? (
                           <svg
-                            className="w-6 h-6 text-gray-800"
+                            className="w-6 h-6 opacity-90"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -260,7 +207,7 @@ my-3 mx-3 z-50"
                           </svg>
                         ) : (
                           <svg
-                            className="w-6 h-6 text-gray-800"
+                            className="w-6 h-6 opacity-90"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -295,24 +242,24 @@ my-3 mx-3 z-50"
                     New Password
                   </label>
                   <div className="mt-2 flex justify-center">
-                    <div className="relative flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <div className="flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
                       <input
                         type={showNewPassword ? "text" : "password"}
                         name="newpassword"
                         id="newpassword"
                         autoComplete="newpassword"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-primary-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mx-2"
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-3 placeholder:text-gray-400  sm:text-sm sm:leading-6  outline-none text-primary-white w-full"
                         placeholder={showNewPassword ? "password" : "••••••••"}
-                        // onChange={onChange}
+                      // onChange={onChange}
                       />
                       <button
                         type="button"
-                        className="absolute right-3 top-[20%] text-[#fff] focus:outline-none"
+                        className="mx-2 right-3 top-[20%] text-[#fff] focus:outline-none"
                         onClick={() => setShowNewPassword(!showNewPassword)}
                       >
                         {showNewPassword ? (
                           <svg
-                            className="w-6 h-6 text-gray-800"
+                            className="w-6 h-6 opacity-90"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -328,7 +275,7 @@ my-3 mx-3 z-50"
                           </svg>
                         ) : (
                           <svg
-                            className="w-6 h-6 text-gray-800"
+                            className="w-6 h-6 opacity-90"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -365,7 +312,7 @@ my-3 mx-3 z-50"
                         autoComplete="checkpassword"
                         className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-primary-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mx-2"
                         placeholder="••••••••"
-                        // onChange={onChange}
+                      // onChange={onChange}
                       />
                     </div>
                   </div>
@@ -376,13 +323,13 @@ my-3 mx-3 z-50"
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-primary-white"
-                // onClick={handleCancel}
+              // onClick={handleCancel}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                className="rounded-md  px-3 py-2 text-sm font-semibold text-primary-white bg-transparent transition ease-in-out duration-150 hover:bg-[#4A9292]/80 border border-[#4A9292] border-1"
               >
                 Save
               </button>
@@ -390,8 +337,8 @@ my-3 mx-3 z-50"
           </form>
         </div>
       </div>
-      <Footer/>
-    </>
+      <Footer />
+    </div>
   );
 };
 

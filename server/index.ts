@@ -29,25 +29,34 @@ app.get("/users", async (req: Request, res: Response) => {
 
 app.post("/adduser", async (req: Request, res: Response) => {
   try {
-    const { name, img, userid, email } = req.body;
+    const { name, img, userid, email, joined} = req.body;
 
-    // Create a new user in the database
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        img,
-        userid,
-        email
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        userid: userid,
       },
     });
 
-    res.json(newUser);
+    if (existingUser) {
+      console.log(existingUser);  
+      res.json(existingUser);
+    } else {
+      const newUser = await prisma.user.create({
+        data: {
+          name,
+          img,
+          userid,
+          email,
+          joined
+        },
+      });
+      res.json(newUser);
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
