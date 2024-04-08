@@ -12,6 +12,10 @@ const Login = () => {
   const context = useContext(UserContext);
   const { userInfo, setUserInfo, RegisterUser, signInUser, forgotPassword, UserDetailsFirebase, signInUserGoogle, signInUserGitHub, getuserinfo } = context!;
   
+  useEffect(()=> {
+    console.log(userInfo);
+  }, [userInfo])
+  
   const [credentails, setCredentails] = useState({
     email: "",
     password: "",
