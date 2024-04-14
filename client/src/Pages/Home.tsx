@@ -7,14 +7,16 @@ import Footer from '../components/global/Footer'
 import Team from '../components/home/Team'
 import Reviews from '../components/home/Reviews'
 import { UserContext } from "../context/userContext";
+import { useAppSelector } from '../store/store'
 
 const Home = () => {
   const context = useContext(UserContext);
   const { userInfo } = context!;
+  const users = useAppSelector(state=> state.user);
 
   useEffect(()=> {
-    console.log(userInfo);
-  }, [userInfo])
+    console.log(users);
+  }, [users])
 
   return (
     <div className='text-[12vh] text-secondary-white bg-primary-background w-full h-fit flex flex-col justify-start items-center overflow-x-clip'>
