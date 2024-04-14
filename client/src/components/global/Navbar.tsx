@@ -5,7 +5,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   console.log(location.pathname);
   return (
-    <div className='flex flex-col w-[83rem] justify-start items-center h-[3.25rem] border-b-[1px] border-[#e7dddd]/30 mt-1'>
+    <div className='flex flex-col w-[83rem] justify-start items-center h-[3.25rem] border-b-[1px] border-[#e7dddd]/30 mt-1 text-white'>
       <div className='w-full h-[3rem] flex justify-between items-center px-3 pb-2'>
         <div className='flex h-[3rem] gap-[1rem] justify-start items-center'>
           <div className='font-redhat font-black text-[3vh] textbackground'>AIEDS</div>

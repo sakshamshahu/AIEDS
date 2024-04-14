@@ -1,6 +1,8 @@
 import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider, User, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { changeUser } from "../store/features/userSlice";
 
 export interface UserInfo {
     // TODO: change details types(as of in the db)
@@ -51,6 +53,11 @@ type UserProviderProps = {
 }
 
 const UserProvider = ({ children }: UserProviderProps) => {
+    const users = useAppSelector(state=> state.user);
+    useEffect(() => {
+        console.log(users);
+    }, [users])
+    const dispatch = useAppDispatch();
     const [userInfo, setUserInfo] = useState({
         name: "",
         img: "",
@@ -189,14 +196,14 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 console.log(result);
                 const user = result.user;
                 console.log("user >>>", user);
-                setUserInfo({
+                dispatch(changeUser({
                     name: user.displayName!,
                     img: user.photoURL!,
                     userid: user.uid,
                     joined: user.metadata.creationTime!,
                     email: user.email!
-                });
-                console.log(userInfo);
+                }));
+                console.log(users);
                 // getuserinfo(
                 //     user.uid,
                 //     user.displayName!,
