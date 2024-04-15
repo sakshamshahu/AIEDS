@@ -11,7 +11,7 @@ import { useAppSelector } from '../store/store'
 
 const Home = () => {
   const context = useContext(UserContext);
-  const { userInfo } = context!;
+  // const { userInfo } = context!;
   const users = useAppSelector(state=> state.user);
 
   useEffect(()=> {
