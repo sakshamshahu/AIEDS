@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./features/userSlice";
+import loaderReducer from "./features/loadingSlice";
+import firebaseReducer from "./features/firebaseSlice";
 import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
@@ -15,6 +17,8 @@ const persistConfig = {
 
 const reducer = combineReducers({
     user: userReducer,
+    loader: loaderReducer,
+    firebase: firebaseReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
