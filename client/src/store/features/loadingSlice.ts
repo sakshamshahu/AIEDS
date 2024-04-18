@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface LoadInfo {
-    loading : boolean
+    loading : boolean,
+    value : number
 }
 
 const initialState: LoadInfo = {
-    loading : false
+    loading : false,
+    value : 0,
 };
 
 const loadingSlice = createSlice({

@@ -1,7 +1,17 @@
 import Navbar from '../components/global/Navbar'
 import Footer from '../components/global/Footer'
 import Textbox from '../components/playground/Textbox'
+import { useAppSelector } from '../store/store';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const Playground = () => {
+  const users = useAppSelector(state => state.user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.table(users);
+    if (users.userid == "") navigate("/login")
+  }, [users])
+
   return (
     <div className='w-full h-screen bg-primary-background text-secondary-white flex flex-col justify-start pt-2 items-center'>
 
