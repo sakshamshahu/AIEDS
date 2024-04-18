@@ -32,9 +32,10 @@ def print_pages(pdf_file, written_file):
 
 #### Set this env variable, otherwise the package will complain
 #### likely (definitely) won't work out of the box
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-pdf_name = input("Enter the name of the .pdf file:" ) + '.pdf'
-written_file_name = input("Enter the name of the file to write to: (exclude the .txt)" ) + '.txt'
-print_pages(pdf_name, written_file_name)
+def main():
+    pdf_name = input("Enter the name of the .pdf file:" ) + '.pdf'
+    written_file_name = input("Enter the name of the file to write to: (exclude the .txt)" ) + '.txt'
+    print_pages(pdf_name, written_file_name)
