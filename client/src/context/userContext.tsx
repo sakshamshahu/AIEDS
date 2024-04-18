@@ -3,6 +3,7 @@ import { onAuthStateChanged, sendPasswordResetEmail, signOut, User } from "fireb
 import auth from "../firebase";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { changeUser } from "../store/features/userSlice";
+import { changeLoader } from "../store/features/loadingSlice";
 
 
 export interface UserContextInterface {
@@ -25,8 +26,10 @@ type UserProviderProps = {
 
 const UserProvider = ({ children }: UserProviderProps) => {
     const users = useAppSelector(state => state.user);
+    const loader = useAppSelector(state => state.loader);
+
     useEffect(() => {
-        console.log(users);
+        console.table(users);
     }, [users])
     const dispatch = useAppDispatch();
 
@@ -46,6 +49,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     const getuserinfo = async (id: string, name: string, email: string, img: string, joined: string) => {
         try {
+            dispatch(changeLoader({ loading: true, value : 60 }));
             let dater = new Date(joined);
             const response = await fetch(`${host}/adduser`, {
                 method: 'POST',

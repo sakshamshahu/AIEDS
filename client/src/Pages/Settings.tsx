@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CloudinaryUploadWidget from "./cloudinaryUpload";
 import NavbarSec from "../components/global/NavbarSec";
 import Footer from "../components/global/Footer";
+import { useAppSelector } from "../store/store";
 
 const Settings = () => {
   // const { showAlert } = props;
@@ -17,7 +18,14 @@ const Settings = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
-  let navigate = useNavigate();
+  const users = useAppSelector(state=> state.user);
+  const navigate = useNavigate();
+  useEffect(()=> {
+    console.table(users);
+    if(users.userid == "") navigate("/login")
+  }, [users])
+
+
   // const context = useContext(contextValue);
   // const { userData, setUserData, getuserinfo, changename, changepassword } =
   // context;

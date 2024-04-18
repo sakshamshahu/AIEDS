@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import rect from "./../assets/_Rect_.png";
 import rect2 from "./../assets/_Rect_2.png";
 import { UserContext } from "../context/userContext";
@@ -8,14 +7,12 @@ import NavbarSec from "../components/global/NavbarSec";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { changeLoader } from "../store/features/loadingSlice";
 import {
-  GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup,
-  // signOut, 
-  updateProfile
+  GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateProfile
 } from "firebase/auth";
 import auth from "../firebase";
-import { changeUser } from "../store/features/userSlice";
 import Loading from "../components/global/Loading";
-import { changeFirebase } from "../store/features/firebaseSlice";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   // const navigate = useNavigate();
@@ -23,7 +20,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const context = useContext(UserContext);
   const { UserDetailsFirebase, getuserinfo } = context!;
-
+  const navigate = useNavigate();
   const [credentails, setCredentails] = useState({
     email: "",
     password: "",
@@ -32,9 +29,15 @@ const Login = () => {
   });
   const [signup, setSignup] = useState(false);
   const [showpassword, setShowpassword] = useState(false);
-  console.log(UserDetailsFirebase)
+  // console.log(UserDetailsFirebase);
   // const context = useContext(userContext);
   // const { login, signin } = context;
+
+  const user = useAppSelector(state => state.user)
+  useEffect(() => {
+    if(user.userid != "") navigate("/");
+  }, [user])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -47,80 +50,75 @@ const Login = () => {
         return;
       }
 
-      dispatch(changeLoader({ loading: true }));
+      dispatch(changeLoader({ loading: true, value: 20 }));
       try {
         await createUserWithEmailAndPassword(auth, credentails.email, credentails.password);
         await updateProfile(auth.currentUser!, {
           displayName: credentails.name
         });
-        dispatch(changeUser({
-          name: auth.currentUser?.displayName!,
-          img: auth.currentUser?.photoURL!,
-          userid: auth.currentUser?.uid!,
-          joined: auth.currentUser?.metadata.creationTime!,
-          email: auth.currentUser?.email!
-        }));
+        getuserinfo(
+          auth.currentUser?.uid!,
+          auth.currentUser?.displayName!,
+          auth.currentUser?.email!,
+          auth.currentUser?.photoURL!,
+          auth.currentUser?.metadata.creationTime!,
+        );
+        navigate("/");
       } catch (error: any) {
         console.error("Registration failed:", error.message);
       } finally {
-        dispatch(changeLoader({ loading: false }));
+        dispatch(changeLoader({ loading: false, value: 0 }));
       }
     } else {
-      dispatch(changeLoader({ loading: true }));
+      dispatch(changeLoader({ loading: true, value: 40 }));
       try {
         // Creating user and updating profile
         let res = await signInWithEmailAndPassword(auth, credentails.email, credentails.password);
         await updateProfile(auth.currentUser!, { displayName: credentails.name });
-        dispatch(changeUser({
-          name: res.user.displayName!,
-          img: res.user.photoURL!,
-          userid: res.user.uid,
-          joined: res.user.metadata.creationTime!,
-          email: res.user.email!
-        }));
+
+        getuserinfo(
+          res.user.uid,
+          res.user.displayName!,
+          res.user.email!,
+          res.user.photoURL!,
+          res.user.metadata.creationTime!,
+        );
+        navigate("/");
       } catch (error: any) {
         console.error("Registration failed:", error.message);
       } finally {
-        dispatch(changeLoader({ loading: false }));
+        dispatch(changeLoader({ loading: false, value: 0 }));
       }
     }
   };
 
   const signInUserGoogle = () => {
     const provider = new GoogleAuthProvider();
-    dispatch(changeLoader({ loading: true }));
+    dispatch(changeLoader({ loading: true, value: 0 }));
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         console.log(result);
         const user = result.user;
         console.log("user >>>", user);
-        dispatch(changeUser({
-          name: user.displayName!,
-          img: user.photoURL!,
-          userid: user.uid,
-          joined: user.metadata.creationTime!,
-          email: user.email!
-        }));
-
-        // getuserinfo(
-        //     user.uid,
-        //     user.displayName!,
-        //     user.email!,
-        //     user.photoURL!,
-        //     user.metadata.creationTime!,
-        // );
-
+        getuserinfo(
+          user.uid,
+          user.displayName!,
+          user.email!,
+          user.photoURL!,
+          user.metadata.creationTime!,
+        );
+        navigate("/");
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         alert(errorCode)
-      }).finally(() => dispatch(changeLoader({ loading: false })));
+      }).finally(() => dispatch(changeLoader({ loading: false, value: 0 })));
   }
 
   const signInUserGitHub = () => {
     const provider = new GithubAuthProvider();
-    dispatch(changeLoader({ loading: true }));
+    dispatch(changeLoader({ loading: false, value: 0 }));
     signInWithPopup(auth, provider)
       .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -135,18 +133,12 @@ const Login = () => {
           user.photoURL!,
           user.metadata.creationTime!,
         );
-        // dispatch(changeUser({
-        //   name: res.name!,
-        //   img: res.img,
-        //   userid: res.userid,
-        //   joined: res.joined,
-        //   email: res.email
-        // }));
+        navigate("/");
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         alert(errorCode)
-      }).finally(() => dispatch(changeLoader({ loading: false })));
+      }).finally(() => dispatch(changeLoader({ loading: false, value: 0 })));
   }
   // const logoutUser = () => {
   //   signOut(auth);

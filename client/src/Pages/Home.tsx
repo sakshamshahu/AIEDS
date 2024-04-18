@@ -6,16 +6,16 @@ import ExploreModel from '../components/home/ExploreModel'
 import Footer from '../components/global/Footer'
 import Team from '../components/home/Team'
 import Reviews from '../components/home/Reviews'
-import { UserContext } from "../context/userContext";
 import { useAppSelector } from '../store/store'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  const context = useContext(UserContext);
-  // const { userInfo } = context!;
+  const navigate = useNavigate();
   const users = useAppSelector(state=> state.user);
 
   useEffect(()=> {
-    console.log(users);
+    console.table(users);
+    if(users.userid == "") navigate("/login")
   }, [users])
 
   return (

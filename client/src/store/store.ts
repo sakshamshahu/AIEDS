@@ -9,7 +9,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const persistConfig = {
     key: 'root',
-    timeout: 1000, 
+    timeout: 300, 
     storage,
     whitelist: ['user'],
     manualPersist: true // Add manual persist flag
