@@ -6,24 +6,24 @@ import { UserContext } from '../../context/userContext';
 
 const HistoryField = () => {
   // const [menuOption, hitoryItems] = useState([]);
-  const sessions = useAppSelector(state=> state.session);
   const context = useContext(UserContext);
   
-  const { getSessions } = context!;
-  // getSessions("userid_value_1");
-  // console.log(sessions)
 
-  // useEffect(() => {
-  //   console.log("SAFDSSDFSDFSDF")
-  //   console.log(sessions)
-  // }, [])
+  const { getSessions } = context!;
+  // console.log(sessions)
+  const history = useAppSelector(state=> state.session);
+
+  useEffect(() => {
+    if(history.sessions.length === 0) getSessions("userid_value_1");
+    console.log(history.sessions);
+  }, [history.sessions]);
   return (
     <div >
-    {/* {items.map(item => (
-            <ul key={item.id}>
-                <li>{item.text}</li>
+    {history.sessions.map(item => (
+            <ul key={item.session_id}>
+                <li>{item.title}</li>
             </ul>
-        ))} */}
+        ))}
     </div>
   )
 }
