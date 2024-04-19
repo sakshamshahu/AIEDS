@@ -20,11 +20,18 @@ model User {
   userid   String    @unique
   joined   DateTime  @default(now())
   email    String    @unique
-  sessions Session[]
 }
+
+model chat_session {
+  session_id      String    @id   @default(uuid())  @unique
+  userid          String
+  time_started    DateTime  @default(now())
+  title           String
+  conversation    String[]  @db.Text      // About conversations: it will be formatted in a specific manner: even ind = user, odd = system 
+  deleted         Boolean
+}                                         
 
 model Session {
   sessionId Int   @id @default(autoincrement())
-  user      User? @relation(fields: [userId], references: [id])
   userId    Int?
 }

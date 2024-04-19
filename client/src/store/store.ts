@@ -6,6 +6,7 @@ import loaderReducer from "./features/loadingSlice";
 import firebaseReducer from "./features/firebaseSlice";
 import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import historyReducer from "./features/historySlice";
 
 const persistConfig = {
     key: 'root',
@@ -19,6 +20,7 @@ const reducer = combineReducers({
     user: userReducer,
     loader: loaderReducer,
     firebase: firebaseReducer,
+    session: historyReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
