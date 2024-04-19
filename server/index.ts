@@ -1,8 +1,24 @@
 // const express = require('express')
 // Import Prisma client
 import { Prisma, PrismaClient } from '@prisma/client';
+const multer = require("multer")
+const path = require("path");
+import { exec } from 'child_process';
+const fs = require('fs');
 
 const prisma = new PrismaClient();
+
+// storing files locally
+const storage = multer.diskStorage({
+  destination: "./docs/",
+  filename: function (req: any, file: { fieldname: string; originalname: any; }, cb: (arg0: null, arg1: string) => void) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+const upload = multer({ storage: storage });
 
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
@@ -14,11 +30,11 @@ app.use(express.json());
 
 const port = process.env.PORT || 8000;
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/", async (_req: Request, res: Response) => {
   res.send("AIDES Backend!!! \n designed by HSM \n © 2024 AIDES. All rights reserved.")
 });
 
-app.get("/users", async (req: Request, res: Response) => {
+app.get("/users", async (_req: Request, res: Response) => {
   try {
     const users = await prisma.user.findMany();
     res.json(users);
