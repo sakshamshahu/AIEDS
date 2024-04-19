@@ -4,11 +4,11 @@ import Textbox from '../components/playground/Textbox'
 import { useAppSelector } from '../store/store';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HistoryField from '../components/playground/HistoryField';
 const Playground = () => {
   const users = useAppSelector(state => state.user);
   const navigate = useNavigate();
   useEffect(() => {
-    console.table(users);
     if (users.userid == "") navigate("/login")
   }, [users])
 
@@ -28,6 +28,7 @@ const Playground = () => {
         </div>
       </div>
       <div />
+      <HistoryField />
       <Textbox />
       <Footer />
     </div>
