@@ -27,10 +27,16 @@ model chat_session {
   userid          String
   time_started    DateTime  @default(now())
   title           String
-  conversation    String[]  @db.Text      // About conversations: it will be formatted in a specific manner: even ind = user, odd = system 
+  conversation    String[]  @db.Text   // About conversations: it will be formatted in a specific manner: even ind = user, odd = system 
   deleted         Boolean
 }                                         
 
+model Conversation {
+  id            String        @id @default(uuid())
+  time          DateTime      @default(now())
+  type          Boolean 
+  content       String        @db.Text
+}
 model Session {
   sessionId Int   @id @default(autoincrement())
   userId    Int?
