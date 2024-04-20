@@ -30,3 +30,5 @@ requires-python = ">3"
 [tool.poetry.scripts]
 dev = "ai.__main__:main"
 pdf = "tests.pdf_reader:main"
+db_store = "ai.chroma:main"
+db_query = "ai.query:main"
