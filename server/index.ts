@@ -45,7 +45,7 @@ app.get("/users", async (_req: Request, res: Response) => {
 
 app.post("/adduser", async (req: Request, res: Response) => {
   try {
-    const { name, img, userid, email, joined} = req.body;
+    const { name, img, userid, email, joined } = req.body;
 
     const existingUser = await prisma.user.findUnique({
       where: {
@@ -120,7 +120,7 @@ app.post("/save_session", async (req: Request, res: Response) => {
     res.status(200).json(updatedSession);
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'Internal server error'})
+    res.status(500).json({ error: 'Internal server error' })
   }
 });
 
@@ -139,7 +139,7 @@ app.post("/fetch_sessions", async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'Internal server error'})
+    res.status(500).json({ error: 'Internal server error' })
   }
 });
 
@@ -154,13 +154,15 @@ app.post("/insert_nonse", async (req: Request, res: Response) => {
               {
                   userid: 'userid_value_1',
                   title: 'title_value_1',
-                  conversation: 'conversation_value_1',
+                  conversation: ["sid is a noob",
+                  "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
                   deleted: true
               },
               {
                   userid: 'userid_value_2',
                   title: 'title_value_2',
-                  conversation: 'conversation_value_2',
+                  conversation: ["sid is a noob",
+                  "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
                   deleted: false
               }
           ]
