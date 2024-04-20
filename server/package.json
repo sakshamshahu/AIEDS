@@ -20,6 +20,7 @@
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "express": "^4.18.3",
+    "multer": "^1.4.5-lts.1",
     "node": "^21.7.1",
     "nodemon": "^3.1.0",
     "pg": "^8.11.3",
@@ -27,5 +28,8 @@
     "rimraf": "^5.0.5",
     "tsc": "^2.0.4",
     "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/multer": "^1.4.11"
   }
 }

@@ -1,0 +1,677 @@
+page 0Documentation
+
+Chatbot
+
+# Approach Explanation with Results:
+e Approach: The approach involves processing PDF documents to extract text data, splitting the
+text into chunks, generating embeddings for the text chunks using a pre-trained model, and
+
+creating a conversational retrieval chain for answering user queries based on the embeddings.
+
+e Results: The code implementation allows users to upload PDF documents, input questions
+
+related to the document content, and receive answers based on the document context.
+
+What is a neural
+network?
+
+Ai
+
+\& & LangChain [|
+& ee —-
+
+question embedding
+
+al
+
+Lim 6)
+
+Chunk of text (document)
+
+Chunk of text (document)
+Chunk of text (document)
+
+Chunk of text (document)
+
+10101 embeddings
+o10l0 |
+01010
+10101 embeddings
+o1ol0
+ranked results
+O1ol0 base)
+
+<8 Pinecone
+
+,
+
+PDF C
+[} PDF
+PDF
+
+
+page 1# Model Architecture and Reasoning:
+
+Model Architecture: The model architecture involves using a pre-trained language model (LLM)
+(Mistral Model) for natural language understanding and generation, combined with a
+conversational retrieval chain for context-based responses. For embeddings | have used
+
+(Instructor model) as it was light weigh for quick usage.
+
+Reason for Selection: The pre-trained LLM, such as Hugging Face's Mistral model, is chosen for
+its ability to understand and generate human-like responses based on textual input. The
+conversational retrieval chain complements the LLM by providing context-aware responses
+
+using vector embeddings of text chunks.
+
+# Hardware Requirements:
+
+For processing PDF documents, sufficient RAM may be needed to handle the text extraction
+and embedding generation tasks efficiently.
+It's recommended to have a machine with at least 8GB of RAM and a GPU with CUDA support
+
+for faster processing, especially if dealing with large documents or complex models.
+
+# Specific Installations Required:
+
+The code requires installation of various libraries and packages, including PyPDF2, langchain,
+Hugging Face's Transformers library, and Streamlit for the user interface, which is included in
+the requirements file, also in the. ipynb file.
+
+Additionally, you are required to have Hugging Face APIs for using their models.
+
+In env file, set (HUGGINGFACEHUB_API_TOKEN = your token). | have already included a token
+
+for your testing.
+
+
+page 0Documentation
+
+Chatbot
+
+# Approach Explanation with Results:
+e Approach: The approach involves processing PDF documents to extract text data, splitting the
+text into chunks, generating embeddings for the text chunks using a pre-trained model, and
+
+creating a conversational retrieval chain for answering user queries based on the embeddings.
+
+e Results: The code implementation allows users to upload PDF documents, input questions
+
+related to the document content, and receive answers based on the document context.
+
+What is a neural
+network?
+
+Ai
+
+\& & LangChain [|
+& ee —-
+
+question embedding
+
+al
+
+Lim 6)
+
+Chunk of text (document)
+
+Chunk of text (document)
+Chunk of text (document)
+
+Chunk of text (document)
+
+10101 embeddings
+o10l0 |
+01010
+10101 embeddings
+o1ol0
+ranked results
+O1ol0 base)
+
+<8 Pinecone
+
+,
+
+PDF C
+[} PDF
+PDF
+
+
+page 1# Model Architecture and Reasoning:
+
+Model Architecture: The model architecture involves using a pre-trained language model (LLM)
+(Mistral Model) for natural language understanding and generation, combined with a
+conversational retrieval chain for context-based responses. For embeddings | have used
+
+(Instructor model) as it was light weigh for quick usage.
+
+Reason for Selection: The pre-trained LLM, such as Hugging Face's Mistral model, is chosen for
+its ability to understand and generate human-like responses based on textual input. The
+conversational retrieval chain complements the LLM by providing context-aware responses
+
+using vector embeddings of text chunks.
+
+# Hardware Requirements:
+
+For processing PDF documents, sufficient RAM may be needed to handle the text extraction
+and embedding generation tasks efficiently.
+It's recommended to have a machine with at least 8GB of RAM and a GPU with CUDA support
+
+for faster processing, especially if dealing with large documents or complex models.
+
+# Specific Installations Required:
+
+The code requires installation of various libraries and packages, including PyPDF2, langchain,
+Hugging Face's Transformers library, and Streamlit for the user interface, which is included in
+the requirements file, also in the. ipynb file.
+
+Additionally, you are required to have Hugging Face APIs for using their models.
+
+In env file, set (HUGGINGFACEHUB_API_TOKEN = your token). | have already included a token
+
+for your testing.
+
+
+page 0UNIVERSITY WITH A PURPOSE
+
+
+page 1Threats and Vulnerability
+
+UNIVERSITY WITH A PURPOSE
+
+
+page 2Threats
+
+¢  ‘...an indication that an undesirable event may occur’ (Parker, 1981).
+
+¢ ‘...any potential danger to information or systems’ (Harris, 2002).
+
+4
+
+...circumstances that have the potential to cause loss or harm’ (Pfleeger, 1996).
+
+f information security is to reach and maintain the CIA triad
+
+required level, threat is something that potentially can
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 3“A threat consists of a potential action or occurrence that may
+affect the information asset’s CIA triad negatively.”
+
+Agents:
+(humans or organizations)
+de artefacts
+
+UNIVERSITY WITH A PURPOSE
+
+page 4Threat Agent (Actor,
+
+Artefact or Natural
+Phenomenon)
+
+Lay behind
+
+Threat
+(Potential Action or
+Occurrence)
+
+Against
+
+Is supposed
+to impair
+
+Information Assets
+(Information and
+resources)
+
+The CIA Triad
+
+Human Threats
+¢ Intentional
+¢ Unintentional
+Non-Human Threats
+¢ IT Artefacts - Virus etc.
+¢ Natural
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 5Physical Threats
+¢ Floods
+Thefts
+
+Threats/Logical Threats
+
+istakes.
+
+UNIVERSITY WITH A PURPOSE
+
+page 6ee
+
+J She CLA Triad
+
+Confidentiality
+
+Information
+Asset
+
+Lay
+behind
+
+Is supposed to impair
+
+Threat
+
+Availability
+
+——— —— ee eee ee
+
+May be
+realized as
+an
+
+\
+!
+!
+I
+!
+!
+!
+|
+
+Integrity
+l
+!
+!
+|
+!
+|
+!
+{
+!
+
+erm eoce tere e emer eecrr==-=
+
+Incident
+Impairs
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+
+page 7Security Mechanisms
+
+Preventing Averting Damage reducing Recovering
+Security Security Security Security
+Mechanism Mechanism Mechanism Mechanism
+Intends to Intends to Intends to Intends to
+reduce obstruct reduce recover
+
+May
+lead to
+
+Impairs
+The CIA
+Triad
+
+Threat
+
+Time
+Uj UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 8Vulnerability
+
+¢ Vulnerability is absence of security mechanisms, or weaknesses
+
+in existing security mechanisms.
+
+nerability may exist in all of the categories of security
+
+s that are mentioned in the previous section, and may
+
+UNIVERSITY WITH A PURPOSE
+
+page 9Information
+
+Asset
+
+Lay
+behind
+
+Is supposed to impair
+
+May be
+realized to
+an
+
+Intends to
+
+Ne ewoneceseeneceseencee’?
+
+Intends to
+reduce
+
+Intends to
+recover
+
+Intends to
+
+Preventing
+
+May exist In
+
+Vulnerability
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 10THANK YOU
+
+L5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+
+page 0Documentation
+
+Chatbot
+
+# Approach Explanation with Results:
+e Approach: The approach involves processing PDF documents to extract text data, splitting the
+text into chunks, generating embeddings for the text chunks using a pre-trained model, and
+
+creating a conversational retrieval chain for answering user queries based on the embeddings.
+
+e Results: The code implementation allows users to upload PDF documents, input questions
+
+related to the document content, and receive answers based on the document context.
+
+What is a neural
+network?
+
+Ai
+
+\& & LangChain [|
+& ee —-
+
+question embedding
+
+al
+
+Lim 6)
+
+Chunk of text (document)
+
+Chunk of text (document)
+Chunk of text (document)
+
+Chunk of text (document)
+
+10101 embeddings
+o10l0 |
+01010
+10101 embeddings
+o1ol0
+ranked results
+O1ol0 base)
+
+<8 Pinecone
+
+,
+
+PDF C
+[} PDF
+PDF
+
+
+page 1# Model Architecture and Reasoning:
+
+Model Architecture: The model architecture involves using a pre-trained language model (LLM)
+(Mistral Model) for natural language understanding and generation, combined with a
+conversational retrieval chain for context-based responses. For embeddings | have used
+
+(Instructor model) as it was light weigh for quick usage.
+
+Reason for Selection: The pre-trained LLM, such as Hugging Face's Mistral model, is chosen for
+its ability to understand and generate human-like responses based on textual input. The
+conversational retrieval chain complements the LLM by providing context-aware responses
+
+using vector embeddings of text chunks.
+
+# Hardware Requirements:
+
+For processing PDF documents, sufficient RAM may be needed to handle the text extraction
+and embedding generation tasks efficiently.
+It's recommended to have a machine with at least 8GB of RAM and a GPU with CUDA support
+
+for faster processing, especially if dealing with large documents or complex models.
+
+# Specific Installations Required:
+
+The code requires installation of various libraries and packages, including PyPDF2, langchain,
+Hugging Face's Transformers library, and Streamlit for the user interface, which is included in
+the requirements file, also in the. ipynb file.
+
+Additionally, you are required to have Hugging Face APIs for using their models.
+
+In env file, set (HUGGINGFACEHUB_API_TOKEN = your token). | have already included a token
+
+for your testing.
+
+
+page 0UNIVERSITY WITH A PURPOSE
+
+
+page 1Threats and Vulnerability
+
+UNIVERSITY WITH A PURPOSE
+
+
+page 2Threats
+
+¢  ‘...an indication that an undesirable event may occur’ (Parker, 1981).
+
+¢ ‘...any potential danger to information or systems’ (Harris, 2002).
+
+4
+
+...circumstances that have the potential to cause loss or harm’ (Pfleeger, 1996).
+
+f information security is to reach and maintain the CIA triad
+
+required level, threat is something that potentially can
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 3“A threat consists of a potential action or occurrence that may
+affect the information asset’s CIA triad negatively.”
+
+Agents:
+(humans or organizations)
+de artefacts
+
+UNIVERSITY WITH A PURPOSE
+
+page 4Threat Agent (Actor,
+
+Artefact or Natural
+Phenomenon)
+
+Lay behind
+
+Threat
+(Potential Action or
+Occurrence)
+
+Against
+
+Is supposed
+to impair
+
+Information Assets
+(Information and
+resources)
+
+The CIA Triad
+
+Human Threats
+¢ Intentional
+¢ Unintentional
+Non-Human Threats
+¢ IT Artefacts - Virus etc.
+¢ Natural
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 5Physical Threats
+¢ Floods
+Thefts
+
+Threats/Logical Threats
+
+istakes.
+
+UNIVERSITY WITH A PURPOSE
+
+page 6ee
+
+J She CLA Triad
+
+Confidentiality
+
+Information
+Asset
+
+Lay
+behind
+
+Is supposed to impair
+
+Threat
+
+Availability
+
+——— —— ee eee ee
+
+May be
+realized as
+an
+
+\
+!
+!
+I
+!
+!
+!
+|
+
+Integrity
+l
+!
+!
+|
+!
+|
+!
+{
+!
+
+erm eoce tere e emer eecrr==-=
+
+Incident
+Impairs
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+
+page 7Security Mechanisms
+
+Preventing Averting Damage reducing Recovering
+Security Security Security Security
+Mechanism Mechanism Mechanism Mechanism
+Intends to Intends to Intends to Intends to
+reduce obstruct reduce recover
+
+May
+lead to
+
+Impairs
+The CIA
+Triad
+
+Threat
+
+Time
+Uj UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 8Vulnerability
+
+¢ Vulnerability is absence of security mechanisms, or weaknesses
+
+in existing security mechanisms.
+
+nerability may exist in all of the categories of security
+
+s that are mentioned in the previous section, and may
+
+UNIVERSITY WITH A PURPOSE
+
+page 9Information
+
+Asset
+
+Lay
+behind
+
+Is supposed to impair
+
+May be
+realized to
+an
+
+Intends to
+
+Ne ewoneceseeneceseencee’?
+
+Intends to
+reduce
+
+Intends to
+recover
+
+Intends to
+
+Preventing
+
+May exist In
+
+Vulnerability
+
+5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+page 10THANK YOU
+
+L5 UPES
+
+UNIVERSITY WITH A PURPOSE
+
+
