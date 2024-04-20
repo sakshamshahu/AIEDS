@@ -75,6 +75,28 @@ app.post("/adduser", async (req: Request, res: Response) => {
 });
 
 
+app.post("/changeUser", async (req: Request, res: Response) => {
+  try {
+    const { username, imageUrl, userId} = req.body;
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        userid: userId,
+      },
+      data: {
+        name: username,
+        img: imageUrl,
+      },
+    });
+    res.json(updatedUser);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 app.post("/save_session", async (req: Request, res: Response) => {  
   // save session can be used in 2 ways: with and without session_id. 
   // With a session ID, it updates a given record

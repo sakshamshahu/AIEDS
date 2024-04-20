@@ -1,113 +1,118 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { UserCircleIcon } from "@heroicons/react/24/solid";
-// import contextValue from "../context/User/userContext.js";
 import { useNavigate } from "react-router-dom";
-import CloudinaryUploadWidget from "./cloudinaryUpload";
 import NavbarSec from "../components/global/NavbarSec";
 import Footer from "../components/global/Footer";
 import { useAppSelector } from "../store/store";
+import { getAuth, updatePassword } from "firebase/auth";
+// import { Cloudinary } from "cloudinary-core";
+
+const host = "http://localhost:8000";
 
 const Settings = () => {
-  // const { showAlert } = props;
-  // const [details, setDetails] = useState({
-  //   oldpassword: "",
-  //   newpassword: "",
-  //   checkpassword: "",
-  //   name: "",
-  // });
-  const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [refillNewPassword, setRefillNewPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [username, setUsername] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  const users = useAppSelector(state=> state.user);
+  const users = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  useEffect(()=> {
+
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  // for changing the password
+  const handleChangePassword = () => {
+    if (user) {
+      updatePassword(user, newPassword)
+        .then(() => {
+          console.log("Password changed successfully!");
+          setNewPassword("");
+          setRefillNewPassword("");
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error("Error changing password:", error);
+        });
+    }
+  };
+
+  // for form submit
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // change username and image
+    if(username != users.name || imageUrl != users.img)
+    {
+        changeDetails();
+    }
+
+    // change password
+    if (newPassword !== refillNewPassword) {
+      setPasswordsMatch(false);
+      return;
+    }
+    setPasswordsMatch(true);
+    console.log("New Password:", newPassword);
+    handleChangePassword();
+  };
+
+  // when clicked cancel
+  const handleCancel = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
     console.table(users);
-    if(users.userid == "") navigate("/login")
-  }, [users])
+    if (users.userid === "") navigate("/login");
+  }, [users, navigate]);
 
+  // for change the userdetails
+  const changeDetails = () => {
+    fetch(`${host}/changeUser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        imageUrl: imageUrl,
+        userId: users.userid
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Username changed successfully!", data);
+      })
+      .catch((error) => {
+        console.error("Error changing username:", error);
+      });
+  };
 
-  // const context = useContext(contextValue);
-  // const { userData, setUserData, getuserinfo, changename, changepassword } =
-  // context;
-  // useEffect(() => {
-  // getuserinfo();
-  // }, []);
-  //looks over the changes in the info
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   let flag = false;
-  //   if (details.name.trim() !== "" || details.name.trim() !== userData.name) {
-  //     try {
-  //       const updatedUser = await changename({ name: details.name });
-  //       if (!updatedUser.success) {
-  //         showAlert(updatedUser.error, "danger");
-  //       } else {
-  //         setUserData((prevUserData) => ({
-  //           ...prevUserData,
-  //           name: details.name,
-  //         }));
-  //         flag = true;
-  //       }
-  //     } catch (error) {
-  //       console.error("Error updating name:", error);
-  //     }
-  // //   }
-  //   if (
-  //     details.oldpassword.trim() !== "" ||
-  //     details.newpassword.trim() !== "" ||
-  //     details.checkpassword.trim() !== ""
-  //   ) {
-  //     if (details.newpassword !== details.checkpassword) {
-  //       showAlert("Recheck your new password!", "warning");
-  //       return;
-  //     } else {
-  //       try {
-  //         const updatedUser = await changepassword({
-  //           oldpassword: details.oldpassword,
-  //           newpassword: details.newpassword,
-  //         });
+  // for uploading the image to cloudinary
+  const handleImageUpload = () => {
+    // const cloudinary = Cloudinary.new({ cloud_name: 'YOUR_CLOUD_NAME' });
+    // const widget = cloudinary.createUploadWidget(
+    //   {
+    //     cloudName: 'YOUR_CLOUD_NAME',
+    //     uploadPreset: 'YOUR_UPLOAD_PRESET'
+    //   },
+    //   (error, result) => {
+    //     if (!error && result && result.event === "success") {
+    //       setImageUrl(result.info.secure_url);
+    //     }
+    //   }
+    // );
+    // widget.open();
 
-  //         if (!updatedUser.success) {
-  //           showAlert(updatedUser.error, "danger");
-  //         } else {
-  //           flag = true;
-  //         }
-  //       } catch (error) {
-  //         console.error("Error updating password:", error);
-  //       }
-  //     }
-  //   }
-  //   if (flag) {
-  //     showAlert("details updated", "success");
-  //   } else {
-  //     showAlert("Recheck your credentails!", "warning");
-  //   }
-  // };
-
-  // const onChange = (e) => {
-  //   setDetails({ ...details, [e.target.name]: e.target.value });
-  // };
-
-  // useEffect(() => {
-  //   const handleKeyDown = (event) => {
-  //     if (event.key === "Escape") {
-  //       event.preventDefault();
-  //       navigate("/");
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", handleKeyDown);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //   };
-  // }, [navigate]);
+    setImageUrl("");
+  };
 
   return (
     <div className="w-full flex flex-col items-center">
       <NavbarSec />
       <div className="isolate w-[50vw] px-6 py-14">
-
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="text-primary-white font-Roboto font-semibold text-[40px] titletextbackground">
             Settings
@@ -119,7 +124,7 @@ const Settings = () => {
         </div>
 
         <div className="flex flex-col justify-center items-center mt-16">
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className="space-y-12">
               <div className="border-b w-[100vh] border-gray-900/10 pb-12">
                 <h2 className="text-base text-center font-semibold leading-7 text-primary-white">
@@ -143,8 +148,8 @@ const Settings = () => {
                           id="name"
                           autoComplete="name"
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1  placeholder:text-gray-400  sm:text-sm sm:leading-6 outline-none text-primary-white"
-                        // placeholder={userData.name}
-                        // onChange={onChange}
+                          onChange={(e) => setUsername(e.target.value)}
+                          value={username}
                         />
                       </div>
                     </div>
@@ -165,9 +170,11 @@ const Settings = () => {
                           alt="pfpd"
                         />
                       </div>
-                      <button id="upload_widget"
+                      <button
+                        id="upload_widget"
                         type="button"
                         className="rounded-md bg-transparent transition ease-in-out duration-150 hover:bg-[#4A9292]/80 border border-[#4A9292] border-1 px-2.5 py-1.5 text-sm font-semibold text-primary-white"
+                        onClick={handleImageUpload}
                       >
                         Change
                       </button>
@@ -181,66 +188,7 @@ const Settings = () => {
                   >
                     Password
                   </label>
-                  <div className="mt-2 flex flex-col items-center justify-center gap-y-2">
-                    <div className="flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
-                      <input
-                        type={showOldPassword ? "text" : "password"}
-                        name="oldpassword"
-                        id="oldpassword"
-                        autoComplete="oldpassword"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-3 placeholder:text-gray-400  sm:text-sm sm:leading-6  outline-none text-primary-white w-full"
-                        placeholder={showOldPassword ? "password" : "••••••••"}
-                      // onChange={onChange}
-                      />
-                      <button
-                        type="button"
-                        className="mx-2 right-3 top-[20%] text-primary-white focus:outline-none"
-                        onClick={() => setShowOldPassword(!showOldPassword)}
-                      >
-                        {showOldPassword ? (
-                          <svg
-                            className="w-6 h-6 opacity-90"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 20 18"
-                          >
-                            <path
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M1.933 10.909A4.357 4.357 0 0 1 1 9c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 19 9c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M2 17 18 1m-5 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                            />
-                          </svg>
-                        ) : (
-                          <svg
-                            className="w-6 h-6 opacity-90"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 20 14"
-                          >
-                            <g
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                            >
-                              <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                              <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z" />
-                            </g>
-                          </svg>
-                        )}
-                      </button>
-                    </div>
-                    <a
-                      href="/forgot-password"
-                      className="text-sm text-end font-medium text-secondary-white hover:underline"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
+                  <div className="mt-2 flex flex-col items-center justify-center gap-y-2"></div>
                 </div>
                 <div className="col-span-full mt-4">
                   <label
@@ -258,7 +206,8 @@ const Settings = () => {
                         autoComplete="newpassword"
                         className="block flex-1 border-0 bg-transparent py-1.5 pl-3 placeholder:text-gray-400  sm:text-sm sm:leading-6  outline-none text-primary-white w-full"
                         placeholder={showNewPassword ? "password" : "••••••••"}
-                      // onChange={onChange}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        value={newPassword}
                       />
                       <button
                         type="button"
@@ -306,32 +255,38 @@ const Settings = () => {
                 </div>
                 <div className="col-span-full mt-4">
                   <label
-                    htmlFor="checkpassword"
+                    htmlFor="newpassword"
                     className="block text-sm font-medium text-center leading-6 text-primary-white"
                   >
                     Refill new Password
                   </label>
                   <div className="mt-2 flex justify-center">
-                    <div className="relative flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <div className="relative flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-inset sm:max-w-md">
                       <input
-                        type="password"
-                        name="checkpassword"
-                        id="checkpassword"
-                        autoComplete="checkpassword"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-primary-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 mx-2"
-                        placeholder="••••••••"
-                      // onChange={onChange}
+                        type="text"
+                        name="refillnewpassword"
+                        id="refillnewpassword"
+                        autoComplete="refillnewpassword"
+                        className="block flex-1 border-0 bg-transparent py-1.5 pl-3 placeholder:text-gray-400  sm:text-sm sm:leading-6  outline-none text-primary-white w-full"
+                        placeholder={showNewPassword ? "password" : "••••••••"}
+                        onChange={(e) => setRefillNewPassword(e.target.value)}
+                        value={refillNewPassword}
                       />
                     </div>
                   </div>
                 </div>
+                {!passwordsMatch && (
+                  <div className="text-red-500 mt-2">
+                    Passwords do not match.
+                  </div>
+                )}
               </div>
             </div>
             <div className="mt-6 flex items-center justify-end gap-x-6 w-full">
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-primary-white"
-              // onClick={handleCancel}
+                onClick={handleCancel}
               >
                 Cancel
               </button>
