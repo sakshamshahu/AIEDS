@@ -20,6 +20,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 
@@ -202,6 +203,47 @@ app.post("/insert_nonse", async (req: Request, res: Response) => {
   }
 })
 
+
+
+// upload file route
+app.post('/uploadFile', upload.array('files', 10), (req, res) => {
+  try {
+    const filesArray: any = req.files;
+    const pdfFiles: string[] = filesArray?.map((file: { filename: any; })=> file.filename);
+    
+    if (!pdfFiles || pdfFiles.length === 0) {
+      return res.status(400).send('No PDF files were uploaded.');
+    }
+
+    // calling the python file here
+    pdfFiles.forEach((filename, index) => {
+      console.log("i am here");
+      const command = `python ./../AI/tests/pdf_reader.py ./docs/${filename} ./docs/content.txt`;
+      console.log('Command:', command);
+
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Error processing PDF file ${index + 1}:`, error.message);
+        }
+        if (stderr) {
+          console.error(`stderr for PDF file ${index + 1}:`, stderr);
+        }
+        console.log(`stdout for PDF file ${index + 1}:`, stdout);
+
+        try {
+          fs.unlinkSync(`./docs/${filename}`);
+          console.log(`File ${filename} deleted.`);
+        } catch (err) {
+          console.error(`Error deleting file ${filename}:`, err);
+        }
+      });
+    });
+
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    res.status(500).send("Error uploading file.");
+  }
+});
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
