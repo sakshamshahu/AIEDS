@@ -5,6 +5,7 @@ const host = "http://localhost:8000"
 const Textbox = () => {
   const [menuOption, setMenuOption] = useState<number>(0);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [content, setContent] = useState<string>("");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -34,6 +35,8 @@ const Textbox = () => {
 
       if (response.ok) {
         console.log("Files uploaded successfully");
+        const content = await response.text();
+        setContent(content);
       } else {
         console.error("Failed to upload files");
       }
@@ -71,6 +74,7 @@ const Textbox = () => {
                   <textarea
                     className="rounded-[15px] absolute w-full inset-0 h-full bg-transparent border-none outline-none resize-none scroll-px-10 px-2 py-3 text-[1.2rem]"
                     placeholder="add your content here"
+                    value={content}
                   ></textarea>
                 ) : (
                   // when we have insights content up
