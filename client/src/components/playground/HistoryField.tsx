@@ -15,7 +15,7 @@ const HistoryField = () => {
 
   useEffect(() => {
     if(history.sessions.length === 0) getSessions("userid_value_1");
-    console.log(history.sessions);
+    // console.log(history.sessions);
   }, [history.sessions]);
   return (
     <div >

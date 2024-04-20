@@ -35,7 +35,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     const loader = useAppSelector(state => state.loader);
 
     useEffect(() => {
-        console.table(users);
+        // console.table(users);
     }, [users])
     const dispatch = useAppDispatch();
 
@@ -110,7 +110,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 body: JSON.stringify({ user_id: id })
             })
             const json = await response.json(); 
-            console.log("MY SON IS JSON", json)
+            // console.log("MY SON IS JSON", json)
             const sessions: SessionInfo[] = json.sessions;
             dispatch(addHistory({
                 sessions: sessions

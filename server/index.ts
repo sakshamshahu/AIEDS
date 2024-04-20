@@ -214,31 +214,55 @@ app.post('/uploadFile', upload.array('files', 10), (req, res) => {
     if (!pdfFiles || pdfFiles.length === 0) {
       return res.status(400).send('No PDF files were uploaded.');
     }
+    
+    // removing the previous content
+    fs.writeFile("./docs/content.txt", '', (err:any) => {
+      if (err) {
+        console.error('Error clearing file:', err);
+        return res.status(500).send('Error clearing file.');
+      }
+      console.log('Content of the file has been cleared.');
+      
+      // calling the python file here
+      const fileCount = pdfFiles.length;
+      let completedCount = 0;
+      
+      pdfFiles.forEach((filename, index) => {
+        console.log("i am here");
+        const command = `python ./../AI/tests/pdf_reader.py ./docs/${filename} ./docs/content.txt`;
+        console.log('Command:', command);
 
-    // calling the python file here
-    pdfFiles.forEach((filename, index) => {
-      console.log("i am here");
-      const command = `python ./../AI/tests/pdf_reader.py ./docs/${filename} ./docs/content.txt`;
-      console.log('Command:', command);
+        exec(command, (error, stdout, stderr) => {
+          completedCount++;
+          if (error) {
+            console.error(`Error processing PDF file ${index + 1}:`, error.message);
+          }
+          if (stderr) {
+            console.error(`stderr for PDF file ${index + 1}:`, stderr);
+          }
+          console.log(`stdout for PDF file ${index + 1}:`, stdout);
 
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error processing PDF file ${index + 1}:`, error.message);
-        }
-        if (stderr) {
-          console.error(`stderr for PDF file ${index + 1}:`, stderr);
-        }
-        console.log(`stdout for PDF file ${index + 1}:`, stdout);
+          try {
+            fs.unlinkSync(`./docs/${filename}`);
+            console.log(`File ${filename} deleted.`);
+          } catch (err) {
+            console.error(`Error deleting file ${filename}:`, err);
+          }
 
-        try {
-          fs.unlinkSync(`./docs/${filename}`);
-          console.log(`File ${filename} deleted.`);
-        } catch (err) {
-          console.error(`Error deleting file ${filename}:`, err);
-        }
+          // If all files are processed, read and send data
+          if (completedCount === fileCount) {
+            fs.readFile("./docs/content.txt", 'UTF-8', (err: any, data: any) => {
+              if (err) {
+                console.error('Error reading file:', err);
+                return res.status(500).send('Error reading file.');
+              }
+              // Return the content
+              res.status(200).send(data);
+            });
+          }
+        });
       });
     });
-
   } catch (error) {
     console.error("Error uploading file:", error);
     res.status(500).send("Error uploading file.");
