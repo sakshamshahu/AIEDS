@@ -4,7 +4,8 @@ import auth from "../firebase";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { changeUser } from "../store/features/userSlice";
 import { changeLoader } from "../store/features/loadingSlice";
-import { addHistory, SessionInfo } from "../store/features/historySlice";
+import { addHistory, HistoryState, SessionInfo } from "../store/features/historySlice";
+import { addSession } from "../store/features/sessionSlice";
 
 
 export interface UserContextInterface {
@@ -13,6 +14,7 @@ export interface UserContextInterface {
     getuserinfo: (id: string, name: string, email: string, img: string, joined: string) => void;
     saveSession: (session: SessionInfo) => void;
     getSessions: (id: string) => void;
+    newSession: (id: string) => void;
 }
 
 const defaultState = {
@@ -20,7 +22,8 @@ const defaultState = {
     setUserDetailsFirebase: (user: User) => { },
     getuserinfo: () => { },
     saveSession: () => { },
-    getSessions: () => { }
+    getSessions: () => { }, 
+    newSession: () => { },
 } as UserContextInterface
 
 export const UserContext = createContext(defaultState);
@@ -33,7 +36,7 @@ type UserProviderProps = {
 const UserProvider = ({ children }: UserProviderProps) => {
     const users = useAppSelector(state => state.user);
     const loader = useAppSelector(state => state.loader);
-
+    const history = useAppSelector(state => state.history)
     useEffect(() => {
         // console.table(users);
     }, [users])
@@ -52,10 +55,10 @@ const UserProvider = ({ children }: UserProviderProps) => {
         return unsubscribe;
     });
 
-    
+
     const getuserinfo = async (id: string, name: string, email: string, img: string, joined: string) => {
         try {
-            dispatch(changeLoader({ loading: true, value : 60 }));
+            dispatch(changeLoader({ loading: true, value: 60 }));
             let dater = new Date(joined);
             const response = await fetch(`${host}/adduser`, {
                 method: 'POST',
@@ -78,6 +81,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 joined: json.joined,
                 email: json.email
             }));
+
+            return json;
         } catch (error) {
             console.error('Error fetching user data:', error);
             // Return default UserInfo object in case of error
@@ -88,6 +93,19 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 joined: "",
                 email: ""
             };
+        }
+    }
+
+    const updateSessionWithLatest = (history: HistoryState) => {
+        // Check if there are any sessions in history
+        if (history.sessions.length > 0) {
+            // Find the latest session based on time_started
+            const latestSession = history.sessions.reduce((prev, current) =>
+                new Date(prev.time_started) > new Date(current.time_started) ? prev : current
+            );
+    
+            // Dispatch the action to update session state with the latest session
+            dispatch(addSession(latestSession));
         }
     }
 
@@ -109,12 +127,17 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 },
                 body: JSON.stringify({ user_id: id })
             })
-            const json = await response.json(); 
+            const json = await response.json();
             // console.log("MY SON IS JSON", json)
-            const sessions: SessionInfo[] = json.sessions;
+            let sessions: SessionInfo[] = json.sessions;
+            if(sessions.length === 0){
+                newSession(id);
+            }
             dispatch(addHistory({
                 sessions: sessions
-            }))
+            }));
+            updateSessionWithLatest({sessions: sessions});
+            return {sessions: sessions};
         } catch (error) {
             console.error('Error fetching user sessions', error);
 
@@ -123,14 +146,41 @@ const UserProvider = ({ children }: UserProviderProps) => {
             };
         }
     }
-    
-    const saveSession = async (session: SessionInfo) => {
-        let convo = "";
-        for (const mess in session.conversation) {
-            convo += mess + "|||";
-        }
+
+    const newSession = async (id: string) => {
         try {
-            const response = await fetch(`${host}/fetch_sessions`, {
+            const response = await fetch(`${host}/save_session`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userid: id,
+                    title: `Session of ${id}`,
+                    deleted: false
+                })
+            });
+            const json = await response.json();
+            getSessions(id);
+
+            return {sessions: [json]};
+        } catch (error) {
+            console.error('Error fetching user sessions', error);
+
+            return {
+                sessions: null
+            };
+        }
+    }
+        
+    const saveSession = async (session: SessionInfo) => {
+
+        try {
+            // let convo = "";
+            // for (const mess in session.conversation) {
+            //     convo += mess + "|||";
+            // }
+            const response = await fetch(`${host}/save_session`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -139,7 +189,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
                     session_id: session.session_id,
                     userid: session.userid,
                     time_started: session.time_started,
-                    title: session.title, 
+                    title: session.title,
                     conversation: session.conversation,
                     deleted: session.deleted
                 })
@@ -158,10 +208,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }
     }
 
-
-    const makeSession = async () => {
-        
-    }
+    
     // const logoutUser = () => {
     //     signOut(auth);
     // }
@@ -177,7 +224,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
             setUserDetailsFirebase,
             getuserinfo,
             saveSession,
-            getSessions
+            getSessions,
+            newSession
         }}>
             {children}
         </UserContext.Provider >
