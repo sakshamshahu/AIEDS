@@ -8,6 +8,7 @@ import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import historyReducer from "./features/historySlice";
 import sessionReducer from "./features/sessionSlice";
+import fileReducer from "./features/fileSlice";
 
 const persistConfig = {
     key: 'root',
@@ -22,7 +23,8 @@ const reducer = combineReducers({
     loader: loaderReducer,
     firebase: firebaseReducer,
     history: historyReducer,
-    session: sessionReducer
+    session: sessionReducer,
+    files: fileReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
