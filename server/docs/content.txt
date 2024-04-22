@@ -1,0 +1,87 @@
+page 0Documentation
+
+Chatbot
+
+# Approach Explanation with Results:
+e Approach: The approach involves processing PDF documents to extract text data, splitting the
+text into chunks, generating embeddings for the text chunks using a pre-trained model, and
+
+creating a conversational retrieval chain for answering user queries based on the embeddings.
+
+e Results: The code implementation allows users to upload PDF documents, input questions
+
+related to the document content, and receive answers based on the document context.
+
+What is a neural
+network?
+
+Ai
+
+\& & LangChain [|
+& ee —-
+
+question embedding
+
+al
+
+Lim 6)
+
+Chunk of text (document)
+
+Chunk of text (document)
+Chunk of text (document)
+
+Chunk of text (document)
+
+10101 embeddings
+o10l0 |
+01010
+10101 embeddings
+o1ol0
+ranked results
+O1ol0 base)
+
+<8 Pinecone
+
+,
+
+PDF C
+[} PDF
+PDF
+
+
+page 1# Model Architecture and Reasoning:
+
+Model Architecture: The model architecture involves using a pre-trained language model (LLM)
+(Mistral Model) for natural language understanding and generation, combined with a
+conversational retrieval chain for context-based responses. For embeddings | have used
+
+(Instructor model) as it was light weigh for quick usage.
+
+Reason for Selection: The pre-trained LLM, such as Hugging Face's Mistral model, is chosen for
+its ability to understand and generate human-like responses based on textual input. The
+conversational retrieval chain complements the LLM by providing context-aware responses
+
+using vector embeddings of text chunks.
+
+# Hardware Requirements:
+
+For processing PDF documents, sufficient RAM may be needed to handle the text extraction
+and embedding generation tasks efficiently.
+It's recommended to have a machine with at least 8GB of RAM and a GPU with CUDA support
+
+for faster processing, especially if dealing with large documents or complex models.
+
+# Specific Installations Required:
+
+The code requires installation of various libraries and packages, including PyPDF2, langchain,
+Hugging Face's Transformers library, and Streamlit for the user interface, which is included in
+the requirements file, also in the. ipynb file.
+
+Additionally, you are required to have Hugging Face APIs for using their models.
+
+In env file, set (HUGGINGFACEHUB_API_TOKEN = your token). | have already included a token
+
+for your testing.
+
+
