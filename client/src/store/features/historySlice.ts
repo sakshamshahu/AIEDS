@@ -17,6 +17,7 @@ const initialState : HistoryState = {
     sessions : []
 }
 
+
 const historySlice = createSlice({
     name: 'history',
     initialState,

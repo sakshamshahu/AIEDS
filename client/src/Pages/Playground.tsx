@@ -1,16 +1,39 @@
 import Navbar from '../components/global/Navbar'
 import Footer from '../components/global/Footer'
 import Textbox from '../components/playground/Textbox'
-import { useAppSelector } from '../store/store';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HistoryField from '../components/playground/HistoryField';
+import { UserContext } from './../context/userContext';
+import { addHistory } from '../store/features/historySlice';
+import { changeLoader } from '../store/features/loadingSlice';
 const Playground = () => {
-  const users = useAppSelector(state => state.user);
+  const context = useContext(UserContext);
+  const user = useAppSelector(state => state.user);
+  const session = useAppSelector(state => state.session);
   const navigate = useNavigate();
+  const [sessionsFetched, setSessionsFetched] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const { getSessions } = context!;
+  const history = useAppSelector(state => state.history);
+
   useEffect(() => {
-    if (users.userid == "") navigate("/login")
-  }, [users])
+    console.log(session);
+  }, [session]);
+
+  useEffect(() => {
+    if (user.userid === "") navigate("/login");
+  }, [user.userid, navigate]);
+
+  useEffect(() => {
+    if (!sessionsFetched && history.sessions && user.userid && history.sessions?.length === 0) {
+      getSessions(user.userid);
+      setSessionsFetched(true);
+    }
+  }, [history.sessions?.length, sessionsFetched, getSessions]);
+
+
 
   return (
     <div className='w-full h-screen bg-primary-background text-secondary-white flex flex-col justify-start pt-2 items-center'>
@@ -28,7 +51,6 @@ const Playground = () => {
         </div>
       </div>
       <div />
-      <HistoryField />
       <Textbox />
       <Footer />
     </div>
