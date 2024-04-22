@@ -204,11 +204,43 @@ app.post("/insert_nonse", async (req: Request, res: Response) => {
 })
 
 
+app.post("/fetch_files", async (req: Request, res: Response) => {  
+  try {
+    const user_id = req.body;
+    const files = await prisma.file.findMany({
+      where: {
+        user_id: user_id
+      }
+    });
+    res.status(200).json({
+      files: files
+    });
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+});
+
 
 // upload file route
-app.post('/uploadFile', upload.array('files', 10), (req, res) => {
+app.post('/uploadFile',  upload.array('files', 10), async (req, res) => {
   try {
     const filesArray: any = req.files;
+
+    // Save the file
+    const { time_uploaded, user_id } = req.body;
+    for (var i = 0; i < filesArray.length; i++)
+      var file_name = filesArray[i].originalname;
+      var size = filesArray[i].size;
+      const uploadedFile = await prisma.file.create({
+        data: {
+          time_uploaded,
+          file_name,
+          size,
+          user_id,
+        }
+      });
+    
     const pdfFiles: string[] = filesArray?.map((file: { filename: any; })=> file.filename);
 
     const { userId, lastModified } = req.body;
