@@ -210,6 +210,11 @@ app.post('/uploadFile', upload.array('files', 10), (req, res) => {
   try {
     const filesArray: any = req.files;
     const pdfFiles: string[] = filesArray?.map((file: { filename: any; })=> file.filename);
+
+    const { userId, lastModified } = req.body;
+
+    console.log("user id - >> " ,userId);
+    console.log("time uploaded - >> ", lastModified);
     
     if (!pdfFiles || pdfFiles.length === 0) {
       return res.status(400).send('No PDF files were uploaded.');
