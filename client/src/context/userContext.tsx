@@ -15,6 +15,7 @@ export interface UserContextInterface {
     getuserinfo: (id: string, name: string, email: string, img: string, joined: string) => void;
     saveSession: (session: SessionInfo) => void;
     getSessions: (id: string) => void;
+    newSession: (id: string) => void;
     getFiles: (id: string) => void;
 }
 
@@ -23,7 +24,8 @@ const defaultState = {
     setUserDetailsFirebase: (user: User) => { },
     getuserinfo: () => { },
     saveSession: () => { },
-    getSessions: () => { },
+    getSessions: () => { }, 
+    newSession: () => { },
     getFiles: () => { },
 } as UserContextInterface
 
@@ -104,7 +106,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const latestSession = history.sessions.reduce((prev, current) =>
                 new Date(prev.time_started) > new Date(current.time_started) ? prev : current
             );
-
             // Dispatch the action to update session state with the latest session
             dispatch(addSession(latestSession));
         }
@@ -141,7 +142,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 sessions: null
             };
         }
-
     }
 
     const getSessions = async (id: string) => {
@@ -156,7 +156,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const json = await response.json();
             // console.log("MY SON IS JSON", json)
             let sessions: SessionInfo[] = json.sessions;
-            if (sessions.length === 0) {
+
+            if(sessions.length === 0){
                 newSession(id);
             }
             dispatch(addHistory({
@@ -198,7 +199,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
             };
         }
     }
-
     const saveSession = async (session: SessionInfo) => {
 
         try {
@@ -234,7 +234,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }
     }
 
-
     // const logoutUser = () => {
     //     signOut(auth);
     // }
@@ -251,6 +250,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             getuserinfo,
             saveSession,
             getSessions,
+            newSession,
             getFiles
         }}>
             {children}
