@@ -28,6 +28,7 @@ model chat_session {
   time_started    DateTime  @default(now())
   title           String
   conversation    String[]  @db.Text   // About conversations: it will be formatted in a specific manner: even ind = user, odd = system 
+  file_context    String[] 
   deleted         Boolean
 }                                         
 
@@ -37,6 +38,15 @@ model Conversation {
   type          Boolean 
   content       String        @db.Text
 }
+
+model File {
+    file_id         String        @id @default(uuid())
+    time_uploaded   DateTime      @default(now())
+    file_name       String
+    size            Int
+    user_id         String
+} 
+
 model Session {
   sessionId Int   @id @default(autoincrement())
   userId    Int?

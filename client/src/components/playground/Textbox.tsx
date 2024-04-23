@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../store/store";
 
 const host = "http://localhost:8000"
 
@@ -6,6 +7,8 @@ const Textbox = () => {
   const [menuOption, setMenuOption] = useState<number>(0);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [content, setContent] = useState<string>("");
+
+  const users = useAppSelector((state) => state.user);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -27,6 +30,9 @@ const Textbox = () => {
       { 
         formData.append('files', files[i]);
       }
+
+      formData.append('userId', users.userid.toString());
+      formData.append('lastModified', new Date().toISOString())
 
       const response = await fetch(`${host}/uploadFile`, {
         method: "POST",

@@ -6,6 +6,7 @@ import { changeUser } from "../store/features/userSlice";
 import { changeLoader } from "../store/features/loadingSlice";
 import { addHistory, HistoryState, SessionInfo } from "../store/features/historySlice";
 import { addSession } from "../store/features/sessionSlice";
+import { addFile } from "../store/features/fileSlice";
 
 
 export interface UserContextInterface {
@@ -14,7 +15,7 @@ export interface UserContextInterface {
     getuserinfo: (id: string, name: string, email: string, img: string, joined: string) => void;
     saveSession: (session: SessionInfo) => void;
     getSessions: (id: string) => void;
-    newSession: (id: string) => void;
+    getFiles: (id: string) => void;
 }
 
 const defaultState = {
@@ -22,8 +23,8 @@ const defaultState = {
     setUserDetailsFirebase: (user: User) => { },
     getuserinfo: () => { },
     saveSession: () => { },
-    getSessions: () => { }, 
-    newSession: () => { },
+    getSessions: () => { },
+    getFiles: () => { },
 } as UserContextInterface
 
 export const UserContext = createContext(defaultState);
@@ -103,7 +104,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const latestSession = history.sessions.reduce((prev, current) =>
                 new Date(prev.time_started) > new Date(current.time_started) ? prev : current
             );
-    
+
             // Dispatch the action to update session state with the latest session
             dispatch(addSession(latestSession));
         }
@@ -118,6 +119,31 @@ const UserProvider = ({ children }: UserProviderProps) => {
     //     conversation:    string;   
     //     deleted:         Boolean;
     // }
+
+
+    const getFiles = async (id: string) => {
+        try {
+            const response = await fetch(`${host}/fetch_files`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ user_id: id })
+            })
+            const json = await response.json();
+            dispatch(addFile({
+                files: json.files
+            }));
+        } catch (error) {
+            console.error('Error fetching user sessions', error);
+
+            return {
+                sessions: null
+            };
+        }
+
+    }
+
     const getSessions = async (id: string) => {
         try {
             const response = await fetch(`${host}/fetch_sessions`, {
@@ -130,14 +156,14 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const json = await response.json();
             // console.log("MY SON IS JSON", json)
             let sessions: SessionInfo[] = json.sessions;
-            if(sessions.length === 0){
+            if (sessions.length === 0) {
                 newSession(id);
             }
             dispatch(addHistory({
                 sessions: sessions
             }));
-            updateSessionWithLatest({sessions: sessions});
-            return {sessions: sessions};
+            updateSessionWithLatest({ sessions: sessions });
+            return { sessions: sessions };
         } catch (error) {
             console.error('Error fetching user sessions', error);
 
@@ -163,7 +189,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const json = await response.json();
             getSessions(id);
 
-            return {sessions: [json]};
+            return { sessions: [json] };
         } catch (error) {
             console.error('Error fetching user sessions', error);
 
@@ -172,7 +198,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             };
         }
     }
-        
+
     const saveSession = async (session: SessionInfo) => {
 
         try {
@@ -208,7 +234,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }
     }
 
-    
+
     // const logoutUser = () => {
     //     signOut(auth);
     // }
@@ -225,7 +251,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             getuserinfo,
             saveSession,
             getSessions,
-            newSession
+            getFiles
         }}>
             {children}
         </UserContext.Provider >

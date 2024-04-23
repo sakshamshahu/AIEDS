@@ -1,8 +1,10 @@
 // const express = require('express')
 // Import Prisma client
 import { Prisma, PrismaClient } from '@prisma/client';
-const multer = require("multer")
-const path = require("path");
+import multer from 'multer';
+import path from 'path';
+// const multer = require("multer")
+// const path = require("path");
 import { exec } from 'child_process';
 const fs = require('fs');
 
@@ -55,7 +57,7 @@ app.post("/adduser", async (req: Request, res: Response) => {
     });
 
     if (existingUser) {
-      console.log(existingUser);  
+      console.log(existingUser);
       res.json(existingUser);
     } else {
       const newUser = await prisma.user.create({
@@ -78,7 +80,7 @@ app.post("/adduser", async (req: Request, res: Response) => {
 
 app.post("/changeUser", async (req: Request, res: Response) => {
   try {
-    const { username, imageUrl, userId} = req.body;
+    const { username, imageUrl, userId } = req.body;
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -90,7 +92,7 @@ app.post("/changeUser", async (req: Request, res: Response) => {
       },
     });
     res.json(updatedUser);
-    
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
@@ -98,7 +100,7 @@ app.post("/changeUser", async (req: Request, res: Response) => {
 });
 
 
-app.post("/save_session", async (req: Request, res: Response) => {  
+app.post("/save_session", async (req: Request, res: Response) => {
   // save session can be used in 2 ways: with and without session_id. 
   // With a session ID, it updates a given record
   // without a session ID, it creates a new record. 
@@ -118,7 +120,7 @@ app.post("/save_session", async (req: Request, res: Response) => {
         data: {
           userid,
           time_started,
-          title, 
+          title,
           conversation,
           deleted
         }
@@ -133,7 +135,7 @@ app.post("/save_session", async (req: Request, res: Response) => {
           session_id,
           userid,
           time_started,
-          title, 
+          title,
           conversation,
           deleted
         }
@@ -171,62 +173,120 @@ app.post("/fetch_sessions", async (req: Request, res: Response) => {
 app.post("/insert_nonse", async (req: Request, res: Response) => {
 
   try {
-      // Insert rows into the chat_session table
-      await prisma.chat_session.createMany({
-          data: [
-              {
-                  userid: 'userid_value_1',
-                  title: 'title_value_1',
-                  conversation: ["sid is a noob",
-                  "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
-                  deleted: true
-              },
-              {
-                  userid: 'userid_value_2',
-                  title: 'title_value_2',
-                  conversation: ["sid is a noob",
-                  "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
-                  deleted: false
-              }
-          ]
-      });
-      console.log('Rows inserted successfully');
-      res.status(200).json({
-        success: true
-      })
+    // Insert rows into the chat_session table
+    await prisma.chat_session.createMany({
+      data: [
+        {
+          userid: 'userid_value_1',
+          title: 'title_value_1',
+          conversation: ["sid is a noob",
+            "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
+          deleted: true
+        },
+        {
+          userid: 'userid_value_2',
+          title: 'title_value_2',
+          conversation: ["sid is a noob",
+            "sid is a noob", "sid is a noob", "sid is a noob", "sid is a noob",],
+          deleted: false
+        }
+      ]
+    });
+    console.log('Rows inserted successfully');
+    res.status(200).json({
+      success: true
+    })
   } catch (error) {
-      console.error('Error inserting rows:', error);
-      res.status(500).json({ 
-        sucess: false,
-        error: 'Internal server error'
-      })
+    console.error('Error inserting rows:', error);
+    res.status(500).json({
+      sucess: false,
+      error: 'Internal server error'
+    })
   }
 })
 
 
+app.post('/playgroundInAction', async (req: Request, res: Response) => {
+  try {
+    const { query, filename } = req.body;
+    
+    // TODO: here the logic to connnect with chroma will come 
+    // ...
+    
+    res.status(200).json({
+      success: true,
+      query,
+      filename
+    });
+  } catch (error) {
+    res.status(500).json({
+      sucess: false,
+      error: 'Internal server error'
+    })
+  }
+})
+
+
+app.post("/fetch_files", async (req: Request, res: Response) => {
+  try {
+    const user_id = req.body;
+    const files = await prisma.file.findMany({
+      where: {
+        user_id: user_id
+      }
+    });
+    res.status(200).json({
+      files: files
+    });
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+});
+
 
 // upload file route
-app.post('/uploadFile', upload.array('files', 10), (req, res) => {
+app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
   try {
     const filesArray: any = req.files;
-    const pdfFiles: string[] = filesArray?.map((file: { filename: any; })=> file.filename);
-    
+
+    // Save the file
+    const { time_uploaded, user_id } = req.body;
+    for (var i = 0; i < filesArray.length; i++)
+      var file_name = filesArray[i].originalname;
+    var size = filesArray[i].size;
+    const uploadedFile = await prisma.file.create({
+      data: {
+        time_uploaded,
+        file_name,
+        size,
+        user_id,
+      }
+    });
+
+    const pdfFiles: string[] = filesArray?.map((file: { filename: any; }) => file.filename);
+
+    const { userId, lastModified } = req.body;
+
+    console.log("user id - >> ", userId);
+    console.log("time uploaded - >> ", lastModified);
+
     if (!pdfFiles || pdfFiles.length === 0) {
       return res.status(400).send('No PDF files were uploaded.');
     }
-    
+
     // removing the previous content
-    fs.writeFile("./docs/content.txt", '', (err:any) => {
+    fs.writeFile("./docs/content.txt", '', (err: any) => {
       if (err) {
         console.error('Error clearing file:', err);
         return res.status(500).send('Error clearing file.');
       }
       console.log('Content of the file has been cleared.');
-      
+
       // calling the python file here
       const fileCount = pdfFiles.length;
       let completedCount = 0;
-      
+
       pdfFiles.forEach((filename, index) => {
         console.log("i am here");
         const command = `python ./../AI/tests/pdf_reader.py ./docs/${filename} ./docs/content.txt`;
