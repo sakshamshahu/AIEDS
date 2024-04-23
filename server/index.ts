@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 // storing files locally
 const storage = multer.diskStorage({
-  destination: "./docs/",
+  destination: "../AI/tests/files",
   filename: function (req: any, file: { fieldname: string; originalname: any; }, cb: (arg0: null, arg1: string) => void) {
     cb(
       null,
@@ -249,78 +249,55 @@ app.post("/fetch_files", async (req: Request, res: Response) => {
 app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
   try {
     const filesArray: any = req.files;
-
+    
     // Save the file
-    const { time_uploaded, user_id } = req.body;
-    for (var i = 0; i < filesArray.length; i++)
-      var file_name = filesArray[i].originalname;
-    var size = filesArray[i].size;
-    const uploadedFile = await prisma.file.create({
-      data: {
-        time_uploaded,
-        file_name,
-        size,
-        user_id,
-      }
-    });
+    // const { lastModified, userId } = req.body;
+    // for (var i = 0; i < filesArray.length; i++)
+    //   var file_name = filesArray[i].originalname;
+    // var size = filesArray[i].size;
+    // const uploadedFile = await prisma.file.create({
+    //   data: {
+    //     time_uploaded,
+    //     file_name,
+    //     size,
+    //     user_id,
+    //   }
+    // });
 
     const pdfFiles: string[] = filesArray?.map((file: { filename: any; }) => file.filename);
-
-    const { userId, lastModified } = req.body;
-
-    console.log("user id - >> ", userId);
-    console.log("time uploaded - >> ", lastModified);
 
     if (!pdfFiles || pdfFiles.length === 0) {
       return res.status(400).send('No PDF files were uploaded.');
     }
 
     // removing the previous content
-    fs.writeFile("./docs/content.txt", '', (err: any) => {
+    fs.writeFile("../AI/tests/output/content.txt", '', (err: any) => {
       if (err) {
         console.error('Error clearing file:', err);
         return res.status(500).send('Error clearing file.');
       }
       console.log('Content of the file has been cleared.');
 
-      // calling the python file here
-      const fileCount = pdfFiles.length;
-      let completedCount = 0;
-
-      pdfFiles.forEach((filename, index) => {
-        console.log("i am here");
-        const command = `python ./../AI/tests/pdf_reader.py ./docs/${filename} ./docs/content.txt`;
+        // change the command to poetry run pdf for your machine
+        const command = `cd ../AI/tests && python pdf_reader.py`; ``
         console.log('Command:', command);
 
+        // command to execute python script
         exec(command, (error, stdout, stderr) => {
-          completedCount++;
           if (error) {
-            console.error(`Error processing PDF file ${index + 1}:`, error.message);
+            console.error(`Error processing PDF file`, error.message);
+            return res.status(500).send("Error processing PDF files");
           }
-          if (stderr) {
-            console.error(`stderr for PDF file ${index + 1}:`, stderr);
-          }
-          console.log(`stdout for PDF file ${index + 1}:`, stdout);
-
-          try {
-            fs.unlinkSync(`./docs/${filename}`);
-            console.log(`File ${filename} deleted.`);
-          } catch (err) {
-            console.error(`Error deleting file ${filename}:`, err);
-          }
-
-          // If all files are processed, read and send data
-          if (completedCount === fileCount) {
-            fs.readFile("./docs/content.txt", 'UTF-8', (err: any, data: any) => {
-              if (err) {
-                console.error('Error reading file:', err);
-                return res.status(500).send('Error reading file.');
-              }
-              // Return the content
-              res.status(200).send(data);
-            });
-          }
-        });
+          
+          // reading and getting the data on the textbox
+          fs.readFile("../AI/tests/output/content.txt", 'UTF-8', (err:any, data:any) => {
+            if (err) {
+              console.error('Error reading file:', err);
+              return res.status(500).send('Error reading file.');
+            }
+            // Return the content
+            res.status(200).send(data);
+          });
       });
     });
   } catch (error) {
