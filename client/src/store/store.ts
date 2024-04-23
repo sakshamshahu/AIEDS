@@ -10,6 +10,7 @@ import historyReducer from "./features/historySlice";
 import sessionReducer from "./features/sessionSlice";
 import fileReducer from "./features/fileSlice";
 
+
 const persistConfig = {
     key: 'root',
     timeout: 300, 
