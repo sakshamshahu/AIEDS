@@ -106,7 +106,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const latestSession = history.sessions.reduce((prev, current) =>
                 new Date(prev.time_started) > new Date(current.time_started) ? prev : current
             );
-    
             // Dispatch the action to update session state with the latest session
             dispatch(addSession(latestSession));
         }
@@ -143,9 +142,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
                 sessions: null
             };
         }
-        
     }
-
 
     const getSessions = async (id: string) => {
         try {
@@ -159,14 +156,15 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const json = await response.json();
             // console.log("MY SON IS JSON", json)
             let sessions: SessionInfo[] = json.sessions;
+
             if(sessions.length === 0){
                 newSession(id);
             }
             dispatch(addHistory({
                 sessions: sessions
             }));
-            updateSessionWithLatest({sessions: sessions});
-            return {sessions: sessions};
+            updateSessionWithLatest({ sessions: sessions });
+            return { sessions: sessions };
         } catch (error) {
             console.error('Error fetching user sessions', error);
 
@@ -192,7 +190,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             const json = await response.json();
             getSessions(id);
 
-            return {sessions: [json]};
+            return { sessions: [json] };
         } catch (error) {
             console.error('Error fetching user sessions', error);
 
@@ -201,7 +199,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
             };
         }
     }
-        
     const saveSession = async (session: SessionInfo) => {
 
         try {
@@ -237,7 +234,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }
     }
 
-    
     // const logoutUser = () => {
     //     signOut(auth);
     // }
