@@ -5,8 +5,6 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './../context/userContext';
-import { addHistory } from '../store/features/historySlice';
-import { changeLoader } from '../store/features/loadingSlice';
 const Playground = () => {
   const context = useContext(UserContext);
   const user = useAppSelector(state => state.user);
@@ -17,10 +15,6 @@ const Playground = () => {
 
   const { getSessions } = context!;
   const history = useAppSelector(state => state.history);
-
-  useEffect(() => {
-    console.log(session);
-  }, [session]);
 
   useEffect(() => {
     if (user.userid === "") navigate("/login");

@@ -7,6 +7,7 @@ module.exports = {
         'primary-background': '#0B121A',
         'secondary-background' : '#7b7b7b29',
         'tertiary-background' : "#0B1823",
+        'tertiary-background-dark' : "#102e41",
         'primary-button-background' : "#87D8D8",
         'secondary-white': '#c7c7c7',
         'primary-white': '#FFF',

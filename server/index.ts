@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-
+import axios from 'axios';
 const app: Express = express();
 app.use(cors());
 app.use(express.json());
@@ -209,15 +209,24 @@ app.post("/insert_nonse", async (req: Request, res: Response) => {
 
 app.post('/playgroundInAction', async (req: Request, res: Response) => {
   try {
-    const { query, filename } = req.body;
-    
+    const { query, filenames } = req.body;
+
     // TODO: here the logic to connnect with chroma will come 
     // ...
-    
+
+    // Extract the data from the Flask server response
+
+    const flaskResponse = await axios.post('http://localhost:5000/llm_reply', {
+      query,
+      filenames,
+    });
+    const flaskData = flaskResponse.data;
+
     res.status(200).json({
       success: true,
       query,
-      filename
+      filenames,
+      flaskData
     });
   } catch (error) {
     res.status(500).json({
@@ -228,7 +237,7 @@ app.post('/playgroundInAction', async (req: Request, res: Response) => {
 })
 
 
-app.post("/fetch_files", async (req: Request, res: Response) => {  
+app.post("/fetch_files", async (req: Request, res: Response) => {
   try {
     const user_id = req.body;
     const files = await prisma.file.findMany({
@@ -272,30 +281,30 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
     }
 
     console.log(pdfFiles);
-        // change the command to poetry run pdf for your machine
-        const command = `cd ../AI && poetry install && poetry shell && poetry run pdf`; ``
-        console.log('Command:', command);
+    // change the command to poetry run pdf for your machine
+    const command = `cd ../AI && poetry install && poetry shell && poetry run pdf`; ``
+    console.log('Command:', command);
 
-        // command to execute python script
-        exec(command, (error, stdout, stderr) => {
-          if (error) {
-            console.error(`Error processing PDF file`, error.message);
-            return res.status(500).send("Error processing PDF files");
+    // command to execute python script
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error processing PDF file`, error.message);
+        return res.status(500).send("Error processing PDF files");
+      }
+
+      // reading and getting the data on the textbox
+      pdfFiles.forEach((filename: string) => {
+        // Read each file asynchronously
+        fs.readFile(`../AI/output/${filename}.txt`, 'UTF-8', (err: any, data: any) => {
+          if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Error reading file.');
           }
-          
-          // reading and getting the data on the textbox
-          pdfFiles.forEach((filename: string) => {
-            // Read each file asynchronously
-            fs.readFile(`../AI/output/${filename}.txt`, 'UTF-8', (err: any, data: any) => {
-                if (err) {
-                    console.error('Error reading file:', err);
-                    return res.status(500).send('Error reading file.');
-                }
-                // Return the content
-                res.status(200).send(data);
-            });
+          // Return the content
+          res.status(200).send(data);
         });
       });
+    });
 
     // removing the previous content
     // fs.writeFile("../AI/output/content.txt", '', (err: any) => {
@@ -305,7 +314,7 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
     //   }
     //   console.log('Content of the file has been cleared.');
 
-      
+
     // });
   } catch (error) {
     console.error("Error uploading file:", error);

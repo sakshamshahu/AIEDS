@@ -25,26 +25,26 @@ services:
     env_file:
       - .env
 
-  aides-db:
-    container_name: aides-db
-    image: postgres:16-alpine
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD-password}
-    volumes:
-      - ./db:/var/lib/postgresql/data
-    ports:
-      - ${DB_PORT-5432}:4004
+  # aides-db:
+  #   container_name: aides-db
+  #   image: postgres:16-alpine
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD-password}
+  #   volumes:
+  #     - ./db:/var/lib/postgresql/data
+  #   ports:
+  #     - ${DB_PORT-5432}:4004
 
-  aides-server:
-    container_name: aides-server
-    build: 
-      context: .
-      dockerfile: ./docker/dev/server.dockerfile
-    restart: unless-stopped
-    ports:
-      - 8000:8000
-    volumes:
-      - ./server:/server
-    env_file:
-      - .env
+  # aides-server:
+  #   container_name: aides-server
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/dev/server.dockerfile
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8000:8000
+  #   volumes:
+  #     - ./server:/server
+  #   env_file:
+  #     - .env

@@ -26,9 +26,12 @@ const sessionSlice = createSlice({
         addSession(state, action: PayloadAction<SessionInfo>) {
             return { ...state, ...action.payload };  
         },
+        appendToConversation(state, action: PayloadAction<string>) {
+            state.conversation.push(action.payload);        
+        }
     }
 });
 
-export const { addSession } = sessionSlice.actions;
+export const { addSession, appendToConversation } = sessionSlice.actions;
 
 export default sessionSlice.reducer;
