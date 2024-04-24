@@ -271,14 +271,7 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
       return res.status(400).send('No PDF files were uploaded.');
     }
 
-    // removing the previous content
-    fs.writeFile("../AI/output/content.txt", '', (err: any) => {
-      if (err) {
-        console.error('Error clearing file:', err);
-        return res.status(500).send('Error clearing file.');
-      }
-      console.log('Content of the file has been cleared.');
-
+    console.log(pdfFiles);
         // change the command to poetry run pdf for your machine
         const command = `cd ../AI && poetry install && poetry shell && poetry run pdf`; ``
         console.log('Command:', command);
@@ -291,16 +284,29 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
           }
           
           // reading and getting the data on the textbox
-          fs.readFile("../AI/output/content.txt", 'UTF-8', (err:any, data:any) => {
-            if (err) {
-              console.error('Error reading file:', err);
-              return res.status(500).send('Error reading file.');
-            }
-            // Return the content
-            res.status(200).send(data);
-          });
+          pdfFiles.forEach((filename: string) => {
+            // Read each file asynchronously
+            fs.readFile(`../AI/output/${filename}.txt`, 'UTF-8', (err: any, data: any) => {
+                if (err) {
+                    console.error('Error reading file:', err);
+                    return res.status(500).send('Error reading file.');
+                }
+                // Return the content
+                res.status(200).send(data);
+            });
+        });
       });
-    });
+
+    // removing the previous content
+    // fs.writeFile("../AI/output/content.txt", '', (err: any) => {
+    //   if (err) {
+    //     console.error('Error clearing file:', err);
+    //     return res.status(500).send('Error clearing file.');
+    //   }
+    //   console.log('Content of the file has been cleared.');
+
+      
+    // });
   } catch (error) {
     console.error("Error uploading file:", error);
     res.status(500).send("Error uploading file.");

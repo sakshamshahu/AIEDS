@@ -31,7 +31,7 @@ def print_pages(pdf_file, written_file):
             f.write("page " + str(pg) + ocr_core(img) + '\n')
 
 def main():
-    directory = './files/'
+    directory = './files'
 
     # Iterate through all the files in the directory
     for filename in os.listdir(directory):
