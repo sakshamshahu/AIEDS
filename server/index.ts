@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 const storage = multer.diskStorage({
   destination: "../AI/files",
   filename: function (req: any, file: { fieldname: string; originalname: any; }, cb: (arg0: null, arg1: string) => void) {
-    const customFileName = file.originalname + path.extname(file.originalname);
+    const customFileName = file.originalname
     cb(
       null,
       customFileName
