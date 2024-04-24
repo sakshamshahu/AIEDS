@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 
 // storing files locally
 const storage = multer.diskStorage({
-  destination: "../AI/tests/files",
+  destination: "../AI/files",
   filename: function (req: any, file: { fieldname: string; originalname: any; }, cb: (arg0: null, arg1: string) => void) {
     cb(
       null,
@@ -271,7 +271,7 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
     }
 
     // removing the previous content
-    fs.writeFile("../AI/tests/output/content.txt", '', (err: any) => {
+    fs.writeFile("../AI/output/content.txt", '', (err: any) => {
       if (err) {
         console.error('Error clearing file:', err);
         return res.status(500).send('Error clearing file.');
@@ -279,7 +279,7 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
       console.log('Content of the file has been cleared.');
 
         // change the command to poetry run pdf for your machine
-        const command = `cd ../AI/tests && python pdf_reader.py`; ``
+        const command = `cd ../AI && poetry install && poetry shell && poetry run pdf`; ``
         console.log('Command:', command);
 
         // command to execute python script
@@ -290,7 +290,7 @@ app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
           }
           
           // reading and getting the data on the textbox
-          fs.readFile("../AI/tests/output/content.txt", 'UTF-8', (err:any, data:any) => {
+          fs.readFile("../AI/output/content.txt", 'UTF-8', (err:any, data:any) => {
             if (err) {
               console.error('Error reading file:', err);
               return res.status(500).send('Error reading file.');

@@ -6,7 +6,7 @@ import os
 
 def pdf_to_img(pdf_file):
     # Turns the pdf to images. PIL images.
-    return pdf2image.convert_from_path(pdf_file, poppler_path=r"C:\ProgramData\poppler-24.02.0\Library\bin")
+    return pdf2image.convert_from_path(pdf_file)
 
 def ocr_core(file):
     # Calls the OCR on a provided file image
@@ -30,11 +30,7 @@ def print_pages(pdf_file, written_file):
             # Each page is individually turned into text and written into a file called "text.txt"
             f.write("page " + str(pg) + ocr_core(img) + '\n')
 
-def main(pdf_file, written_file):
-    print_pages(pdf_file, written_file)
-
-if __name__ == "__main__":
-    
+def main():
     directory = './files'
 
     # Iterate through all the files in the directory
@@ -44,3 +40,16 @@ if __name__ == "__main__":
         if os.path.isfile(filepath):
             print("hello", filepath)
             print_pages(filepath, "./output/content.txt")
+
+
+# if __name__ == "__main__":
+    
+#     directory = './files'
+
+#     # Iterate through all the files in the directory
+#     for filename in os.listdir(directory):
+#         filepath = os.path.join(directory, filename)
+        
+#         if os.path.isfile(filepath):
+#             print("hello", filepath)
+#             print_pages(filepath, "./output/content.txt")
