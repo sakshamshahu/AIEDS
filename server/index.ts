@@ -14,9 +14,10 @@ const prisma = new PrismaClient();
 const storage = multer.diskStorage({
   destination: "../AI/files",
   filename: function (req: any, file: { fieldname: string; originalname: any; }, cb: (arg0: null, arg1: string) => void) {
+    const customFileName = file.originalname + path.extname(file.originalname);
     cb(
       null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      customFileName
     );
   },
 });
@@ -249,7 +250,7 @@ app.post("/fetch_files", async (req: Request, res: Response) => {
 app.post('/uploadFile', upload.array('files', 10), async (req, res) => {
   try {
     const filesArray: any = req.files;
-    
+    console.log(filesArray)
     // Save the file
     // const { lastModified, userId } = req.body;
     // for (var i = 0; i < filesArray.length; i++)
