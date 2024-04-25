@@ -17,4 +17,4 @@ WORKDIR /AIDES
 COPY ../../AI/pyproject.toml ./
 COPY ../../AI/poetry.lock ./
 
-CMD poetry install;poetry run dev
+CMD poetry install;poetry run flask

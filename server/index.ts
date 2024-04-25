@@ -216,7 +216,7 @@ app.post('/playgroundInAction', async (req: Request, res: Response) => {
 
     // Extract the data from the Flask server response
 
-    const flaskResponse = await axios.post('http://localhost:5000/llm_reply', {
+    const flaskResponse = await axios.post('http://127.0.0.1:5000/llm_reply', {
       query,
       filenames,
     });

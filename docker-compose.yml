@@ -1,16 +1,18 @@
 version: "3.3"
 
 services:
-  aides-ai:
-    container_name: aides-ai
-    build:
-      context: .
-      dockerfile: ./docker/dev/ai.dockerfile
-    restart: on-failure
-    volumes:
-      - ./AI:/AIDES
-    env_file:
-      - .env
+#   aides-ai:
+#     container_name: aides-ai
+#     build:
+#       context: .
+#       dockerfile: ./docker/dev/ai.dockerfile
+#     restart: on-failure
+#     ports:
+#       - 5000:5000
+#     volumes:
+#       - ./AI:/AIDES
+#     env_file:
+#       - .env
 
   aides-client:
     container_name: aides-client

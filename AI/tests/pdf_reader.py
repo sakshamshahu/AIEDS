@@ -19,19 +19,21 @@ def ocr_core(file):
 def convert_pages(pdf_file, written_file):
     # First convert pdf to image
     images = pdf_to_img(pdf_file)
+
+    # Then use the tesseract OCR to extract the text
+    text = ""
+    for pg, img in enumerate(images):
+        # Each page is individually turned into text and written into a file called "text.txt"
+        text += "page " + str(pg) + ocr_core(img) + '\n'
     try:
         with open(written_file, 'x') as file:
             pass
             # You can perform other operations on the file here
     except FileExistsError:
         pass
-
-    # Then use the tesseract OCR to extract the text
     with open(written_file, 'w') as f:
-
-        for pg, img in enumerate(images):
-            # Each page is individually turned into text and written into a file called "text.txt"
-            f.write("page " + str(pg) + ocr_core(img) + '\n')
+        f.write(text)
+    
 
 def main():
     directory = './files/'
@@ -64,7 +66,8 @@ def main():
 
             if os.path.isfile(filepath):
                 fname = filepath.split("/")[-1]
-                fname = fname[:len(fname)-4]
+                print(fname)
+                # fname = fname[:len(fname)-4]
                 if (done[fname]):   # remove the file if it already exists
                     os.remove(filepath)
                 else:
