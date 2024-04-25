@@ -78,11 +78,14 @@ const Textbox = () => {
   }
   const handleQuery = async () => {
     setLoading(true);
-    dispatch(appendToConversation(query));
+    dispatch(appendToConversation("--U-" + query));
     // await saveSession(session.session_id, session.userid, session.time_started, session.title, session.conversation, session.deleted);
     setQuery("");
     let res: any = await queryExecution(query, fileStore.files);
-    console.log(res);
+    if(res.sucess === false) {
+      dispatch(appendToConversation("[ server error ]"));
+      setLoading(false);
+    }
     if (res && res.flaskData.message) {
       dispatch(appendToConversation(res.flaskData.message));
     } else {
@@ -104,22 +107,35 @@ const Textbox = () => {
       <div className="w-[90%] h-fit flex flex-col justify-start items-center z-5 ">
         <div className="w-full h-full flex gap-4 justify-between items-start mb-12">
           <div className="w-[180rem] h-full flex flex-col justify-start items-start">
-            <div className="border border-textbox-border border-1 rounded-[1rem] w-full 2xl:h-[55rem] h-[64rem] bg-tertiary-background z-0 mb-6 flex flex-col justify-between items-start ">
-              <div className="z-20 w-full h-full my-2 flex flex-col justify-start items-center overflow-y-auto">
+            <div className="border border-textbox-border border-1 rounded-[1rem] w-full 2xl:h-[55rem] h-[50rem] bg-tertiary-background z-0 mb-6 flex flex-col justify-between items-start ">
+              <div className="z-20 w-full h-full my-2 flex flex-col justify-end items-end overflow-y-auto">
                 {session.conversation.map((message, index) => (
-                  <div key={index} className={`${index % 2 == 0 ? "text-gray-300/80 w-full h-fit flex justify-start items-start" : "bg-tertiary-background-dark/20 text-gray-300/80 w-full h-fit flex justify-start items-start"}`}>
-                    <div className={`w-[3rem] h-[3rem] ${index % 2 == 1 && "bg-orange-400"} mx-4 my-4 rounded-md flex items-center justify-center`}>
-                      {index % 2 == 0 ?
-                        <img className="object-contain" src={users.img ? users.img : "https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4"} alt="" />
+                  <div key={index} className={`${message.substring(0,4) == "--U-" ? "text-gray-300/80 w-full h-fit flex justify-start items-start" : "bg-tertiary-background-dark/20 text-gray-300/80 w-full h-fit flex justify-start items-start"}`}>
+                    <div className={`w-[3rem] h-[3rem] ${message.substring(0,4) !== "--U-" && "bg-orange-400"} mx-4 my-4 rounded-md flex items-center justify-center overflow-hidden`}>
+                      {message.substring(0,4) == "--U-" ?
+                        <img className="object-contain " src={users.img ? users.img : "https://avatars.githubusercontent.com/u/98532264?s=400&u=0cf330740554169402dccc6d6925c21d8850cf03&v=4"} alt="" />
                         :
                         <svg viewBox="0 0 24 24" width="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                       }
                     </div>
                     <p className="w-full h-fit px-3 py-3 font-natosans font-medium">
-                      {message}
+                      {message.substring(0,4) == "--U-" ? message.substring(4) : message}
                     </p>
                   </div>
                 ))}
+                {loading && 
+                  <div className="bg-tertiary-background-dark/20 text-gray-300/80 w-full h-fit flex justify-start items-start">
+                    <div className={`w-[3rem] h-[3rem] bg-orange-400 mx-4 my-4 rounded-md flex items-center justify-center`}>
+                      <svg viewBox="0 0 24 24" width="25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </div>
+                    <p className="w-full h-fit px-3 py-3 font-natosans font-medium">
+                      <div className="relative mt-2">
+                        <span className="absolute animate-ping inline-flex rounded-full h-3 w-3 bg-white"></span>
+                        <span className="absolute inline-flex rounded-full h-3 w-3 bg-tertiary-white"></span>
+                      </div>
+                    </p>
+                  </div>
+                }
               </div>
               <div className=" px-2 w-full h-[3.5rem] my-2">
                 <div className="w-full  h-[3.5rem] border border-textbox-border border-1 rounded-[10px] flex justify-between items-center px-2 bg-textbox-background/10">
