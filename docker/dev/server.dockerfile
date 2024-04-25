@@ -5,4 +5,4 @@ WORKDIR /server
 COPY ../../server/package.json ./
 COPY ../../server/yarn.lock ./
 
-CMD yarn; yarn run dev
+CMD yarn; npx prisma generate; npx prisma migrate dev --name init; npx prisma migrate deploy; yarn run dev

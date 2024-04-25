@@ -34,7 +34,7 @@ services:
     volumes:
       - ./db:/var/lib/postgresql/data
     ports:
-      - ${DB_PORT-5432}:4004
+      - ${DB_PORT-5432}:5432
 
   aides-server:
     container_name: aides-server
@@ -46,5 +46,5 @@ services:
       - 8000:8000
     volumes:
       - ./server:/server
-    env_file:
-      - .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASSWORD-password}@aides-db:${DB_PORT-5432}/postgres

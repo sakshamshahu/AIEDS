@@ -13,10 +13,11 @@ export interface UserContextInterface {
     UserDetailsFirebase: User | null,
     setUserDetailsFirebase: Dispatch<SetStateAction<User | null>>,
     getuserinfo: (id: string, name: string, email: string, img: string, joined: string) => void;
-    saveSession: (session: SessionInfo) => void;
+    saveSession: (session_id: string, userid: string, time_started: string, title: string, conversation: string[], deleted: Boolean) => void;
     getSessions: (id: string) => void;
     newSession: (id: string) => void;
     getFiles: (id: string) => void;
+    queryExecution: (query: string, filenames: string[]) => void;
 }
 
 const defaultState = {
@@ -24,9 +25,10 @@ const defaultState = {
     setUserDetailsFirebase: (user: User) => { },
     getuserinfo: () => { },
     saveSession: () => { },
-    getSessions: () => { }, 
+    getSessions: () => { },
     newSession: () => { },
     getFiles: () => { },
+    queryExecution: () => { },
 } as UserContextInterface
 
 export const UserContext = createContext(defaultState);
@@ -157,7 +159,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
             // console.log("MY SON IS JSON", json)
             let sessions: SessionInfo[] = json.sessions;
 
-            if(sessions.length === 0){
+            if (sessions.length === 0) {
                 newSession(id);
             }
             dispatch(addHistory({
@@ -199,7 +201,32 @@ const UserProvider = ({ children }: UserProviderProps) => {
             };
         }
     }
-    const saveSession = async (session: SessionInfo) => {
+
+    const queryExecution = async (query: string, filenames: string[]) => {
+        try {
+            const response = await fetch(`${host}/playgroundInAction`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    query, filenames
+                })
+            });
+            const json = await response.json();
+
+            return json;
+        } catch (error) {
+            console.error('Error fetching user sessions', error);
+
+            return {
+                success: false,
+            };
+        }
+    }
+
+
+    const saveSession = async (session_id: string, userid: string, time_started: string, title: string, conversation: string[], deleted: Boolean) => {
 
         try {
             // let convo = "";
@@ -212,12 +239,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    session_id: session.session_id,
-                    userid: session.userid,
-                    time_started: session.time_started,
-                    title: session.title,
-                    conversation: session.conversation,
-                    deleted: session.deleted
+                    session_id, userid, time_started, title, conversation, deleted
                 })
             })
             if (response.ok) {
@@ -251,7 +273,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
             saveSession,
             getSessions,
             newSession,
-            getFiles
+            getFiles,
+            queryExecution
         }}>
             {children}
         </UserContext.Provider >

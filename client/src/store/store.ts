@@ -9,6 +9,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import historyReducer from "./features/historySlice";
 import sessionReducer from "./features/sessionSlice";
 import fileReducer from "./features/fileSlice";
+import fileStoreReducer from "./features/fileStoreSlice";
 
 
 const persistConfig = {
@@ -25,7 +26,8 @@ const reducer = combineReducers({
     firebase: firebaseReducer,
     history: historyReducer,
     session: sessionReducer,
-    files: fileReducer
+    files: fileReducer,
+    fileStore: fileStoreReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
