@@ -1,10 +1,13 @@
 import Footer from "../components/global/Footer";
 import NavbarSec from "../components/global/NavbarSec";
-
+import doc1 from "./../assets/doc1.jpeg";
+import doc2 from "./../assets/doc2.png";
+import doc3 from "./../assets/doc3.png";
+import doc4 from "./../assets/doc4.png";
 const Docs = () => {
   return (
     <div className="relative w-full flex flex-col items-center">
-      <NavbarSec/>
+      <NavbarSec />
       <div className=" text-secondary-white bg-primary-background py-10 flex flex-col justify-center items-center w-[80vw]">
         <div className="absolute left-[-30vh] top-[20vh] w-[17rem] h-[35rem] transform -rotate-98.5 flex-shrink-0 sphere1 opacity-10 animate-pulse-slow"></div>
 
@@ -27,22 +30,10 @@ const Docs = () => {
             <div className="col-span-3">
               <div className="max-w-[54rem] text-lg leading-8 text-slate-600">
                 <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  Graphpathguru is a user-friendly application meticulously
-                  crafted to offer individuals an accessible platform for
-                  in-depth exploration and understanding of algorithmic
-                  operations, all presented in a visually intuitive manner. The
-                  platform boasts a diverse array of algorithms, providing users
-                  with the flexibility to choose and engage with various
-                  computational processes.
+                  Our project aims to revolutionize the educational landscape by introducing a transformative learning website that leverages technology to streamline access to educational resources and enhance learning outcomes. Through innovative deep learning techniques and advanced language models, we seek to distil complex PDF materials into concise summaries, making them more accessible and comprehensible to users.
                 </div>
                 <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  Additionally, Graphpathguru includes a host of convenient
-                  features, including the ability to save generated graphs for
-                  future reference and a streamlined sharing function for
-                  uniform graph distribution. This comprehensive tool aims to
-                  empower users with a seamless and enriching experience in
-                  algorithmic analysis, combining ease of use with robust
-                  functionality.
+                  Central to our endeavour is the utilization of a vectorized database, which serves as the backbone for organizing and storing summarized learning content, enabling seamless navigation and exploration of vast repositories of knowledge. Through these efforts, we aspire to empower learners and shape the future of education.
                 </div>
               </div>
             </div>
@@ -72,67 +63,58 @@ const Docs = () => {
             </div>
             <div className="col-span-3">
               <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                Graphpathguru is a application focused on making graph
-                algorithms more accessible and understandable for users. By
-                providing a visually intuitive platform, users can explore and
-                comprehend the operations of various algorithms.
+                Whether pursuing formal education or engaging in self-directed learning, students stand to benefit significantly from our platform.
               </div>
 
               <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 text-sm leading-6 sm:grid-cols-2 lg:grid-cols-2">
                 <div>
                   <div className="relative aspect-[3/2] object-contain overflow-hidden rounded-xl shadow-lg shadow-cyan-700/30">
-                    {/* <img className="w-full h-full object-cover" src={} alt=""/> */}
+                    <img className="w-full h-full object-cover" src={doc1} alt=""/>
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
                     <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 1
                     </span>{" "}
-                    – Launch the application in the "Playground" state to start
+                    – go to the application's  <a href="/playground">"Playground"</a> & start
                     exploring. This will serve as the starting point for your
                     interactive experience.
                   </p>
                 </div>
                 <div>
                   <div className="relative aspect-[3/2] object-contain overflow-hidden rounded-xl shadow-lg shadow-cyan-700/30">
-                    {/* <img className="w-full h-full object-cover" src={} alt=""/> */}
+                    <img className="w-full h-full object-cover" src={doc2} alt=""/>
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
                     <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 2
                     </span>{" "}
-                    – Launch the application in the "Playground" state to start
-                    exploring. This will serve as the starting point for your
-                    interactive experience.
+                    – Users upload PDF documents to the platform, which serve as the primary source of input data. These documents contain textual information on various topics and subjects.
                   </p>
                 </div>
                 <div>
                   <div className="relative aspect-[3/2] object-contain overflow-hidden rounded-xl shadow-lg shadow-cyan-700/30">
-                    {/* <img className="w-full h-full object-cover" src={} alt=""/> */}
+                    <img className="w-full h-full object-cover" src={doc3} alt=""/>
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
                     <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 3
                     </span>{" "}
-                    – Launch the application in the "Playground" state to start
-                    exploring. This will serve as the starting point for your
-                    interactive experience.
+                    – PDF documents are processed and transformed into vectorized representations using techniques such as word embeddings or document embeddings.
                   </p>
                 </div>
                 <div>
                   <div className="relative aspect-[3/2] object-contain overflow-hidden rounded-xl shadow-lg shadow-cyan-700/30">
-                    {/* <img className="w-full h-full object-cover" src={} alt=""/> */}
+                    <img className="w-full h-full object-cover" src={doc4} alt=""/>
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5"></div>
                   </div>
                   <p className="mt-6 text-[13px] font-inter text-tertiary-white text-left">
                     <span className="font-inter font-medium font-normnl text-primary-white text-[1.2rem] ">
                       Step 4
                     </span>{" "}
-                    – Launch the application in the "Playground" state to start
-                    exploring. This will serve as the starting point for your
-                    interactive experience.
+                    – The LLM generates summaries by stitching together the selected sentences from the PDF documents. These summaries represent condensed versions of the original content, providing users with concise and digestible insights.
                   </p>
                 </div>
               </div>
@@ -179,23 +161,11 @@ const Docs = () => {
             <div className="col-span-3">
               <div className=" text-lg leading-8 text-slate-600">
                 <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  Graphpathguru is a user-friendly application meticulously
-                  crafted to offer individuals an accessible platform for
-                  in-depth exploration and understanding of algorithmic
-                  operations, all presented in a visually intuitive manner. The
-                  platform boasts a diverse array of algorithms, providing users
-                  with the flexibility to choose and engage with various
-                  computational processes.
+                  Our reference algorithm leverages an embeddings database, known as Chroma DB, to store representations of PDF inputs. The process begins with users uploading PDF documents to the platform, which are then vectorized and stored in the Chroma DB for efficient retrieval.
                 </div>
 
                 <div className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  Additionally, Graphpathguru includes a host of convenient
-                  features, including the ability to save generated graphs for
-                  future reference and a streamlined sharing function for
-                  uniform graph distribution. This comprehensive tool aims to
-                  empower users with a seamless and enriching experience in
-                  algorithmic analysis, combining ease of use with robust
-                  functionality.
+                  Upon receiving a query, the algorithm utilizes a similarity search technique, currently implemented as cosine similarity, to identify the top K most relevant sentences from the stored documents. This step aims to extract key information from the PDFs based on the user's input.
                 </div>
               </div>
             </div>
@@ -218,61 +188,48 @@ const Docs = () => {
                   </span>{" "}
                   —{" "}
                   <span>
-                    The application likely has a user-friendly interface that
-                    makes it easy for users, even those without a deep
-                    understanding of graph algorithms, to navigate and interact
-                    with the tool.
+                    An intuitive and user-friendly interface allows users to interact with the platform, upload documents, input queries, and access summarized content
                   </span>
                 </p>
 
                 <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Algorithm Variety
+                    Question-Answering System
                   </span>{" "}
                   —{" "}
                   <span>
-                    Graphpathguru offers a range of graph algorithms for users
-                    to choose from. This could include well-known algorithms
-                    like Dijkstra's algorithm, breadth-first search, depth-first
-                    search, and more.
+                    Users can input queries, and the platform utilizes the identified sentences to generate accurate responses through a question-answering system.
                   </span>
                 </p>
 
                 <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Visualization
+                    Large Language Model (LLM) Integration
                   </span>{" "}
                   —{" "}
                   <span>
-                    The tool likely provides graphical representations of graphs
-                    and the outcomes of algorithms. Visualizations can help
-                    users better understand how algorithms traverse and
-                    manipulate graph structures.
+                    The selected sentences are fed into a Large Language Model (LLM), which generates coherent and concise summaries of the PDF
+                    content
                   </span>
                 </p>
 
                 <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Options for Saving Graphs
+                    PDF Upload
                   </span>{" "}
                   —{" "}
                   <span>
-                    Users may have the ability to save the graphs they create or
-                    the results of algorithm executions. This feature is
-                    valuable for future reference or for sharing with others.
+                    Users upload PDF documents to the platform, which serve as the primary source of input data. These documents contain textual information on various topics and subjects
                   </span>
                 </p>
 
                 <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
                   <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Sharing Functionality
+                    Data Availability and Quality
                   </span>{" "}
                   —{" "}
                   <span>
-                    Graphpath guru might have options for users to easily share
-                    their graphs or algorithm results with others. This could
-                    involve generating shareable links or exporting files in
-                    common formats.
+                  The project assumes the availability of diverse and high-quality datasets for training and evaluating machine learning models.
                   </span>
                 </p>
 
@@ -283,33 +240,9 @@ const Docs = () => {
                   —{" "}
                   <span>
                     The tool could be designed with an educational focus,
-                    helping users learn about graph algorithms through hands-on
+                    helping users learn on your context through hands-on
                     exploration rather than relying solely on theoretical
                     explanations.
-                  </span>
-                </p>
-
-                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Algorithm Parameters
-                  </span>{" "}
-                  —{" "}
-                  <span>
-                    Users may have the ability to adjust parameters for each
-                    algorithm, allowing them to see how changes impact the
-                    algorithm's behavior and results.
-                  </span>
-                </p>
-
-                <p className="text-[1.2rem] font-normal text-tertiary-white text-left">
-                  <span className="font-inter font-normal text-primary-white text-[1.2rem] ">
-                    Real-Time Updates
-                  </span>{" "}
-                  —{" "}
-                  <span>
-                    As users interact with the application, they may see
-                    real-time updates to the graph and algorithm outcomes,
-                    providing instant feedback.
                   </span>
                 </p>
               </div>
